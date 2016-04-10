@@ -1,0 +1,446 @@
+//----------PANEL HEADER-----------//
+
+/*
+
+Some element are ready to use:
+
+Logo-holder
+Project-name and img holder
+User-account
+Daterange picker
+Project Platform holder (for Engined project)
+
+
+*/
+
+.panel-header {
+  height:70px;
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+  background-color: $panel-header;
+
+  .panel-top-header {
+    height: 25px;
+    width: 100%;
+    display: none;
+    padding: 0 15px;
+    clear: both;
+    border-bottom: 1px solid $header-border;
+    .panel-top-header-list-holder {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      padding-top: 4px;
+      font-family: $fontstack;
+      font-size: 12px;
+      .panel-top-header-list-item {
+        float: right;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        margin-right: 20px;
+        &:first-child {
+          margin-right: 0;
+        }
+        > a {
+          letter-spacing: 0;
+          color: $header-grey;
+          text-decoration: none;
+          font-size: 11px;
+          &:hover {
+            color: $whitenotwhite;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .panel-large-header {
+    height: 70px;
+    width: 100%;
+  }
+}
+
+.panel-logo-holder {
+  width: 160px;
+  height: 100%;
+  float: left;
+  display: block;
+  border-right: 1px solid $header-border;
+  .panel-logo {
+    height: 24px;
+    width: 18px;
+    margin-top: 23px;
+    margin-left: 71px;
+    background: url('/assets/images/engined-logo-icon-white.svg');
+    @include background-image (100% auto, center);
+  }
+}
+
+.panel-project-wrapper {
+  display: none;
+  width: 300px;
+  height: 100%;
+  float: left;
+  border-right: 1px solid $header-border;
+  .panel-project-holder {
+    height: 100%;
+    width: 100%;
+    .panel-project-item {
+      width: 100%;
+      height: 100%;
+      padding-top: 25px;
+      padding-left: 25px;
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+      @include user-select (none);
+      &:hover {
+        text-decoration: none;
+      }
+      &:focus {
+        outline: 0;
+      }
+      &:before {
+        content: '';
+        right: 20px;
+        top: 30px;
+        height: 10px;
+        width: 13px;
+        display: block;
+        position: absolute;
+        background: url('/assets/images/small/arrow-down-grey.svg');
+        @include background-image (100% auto, center);
+      }
+      .panel-project-img {
+        width: 36px;
+        height: 36px;
+        float: left;
+        border-radius: 50%;
+
+      }
+      .panel-project-name {
+        margin: 0;
+        margin-left: 45px;
+        padding: 0;
+        color: $whitenotwhite;
+        font-size: 14px;
+        font-family: $fontstack;
+        font-weight:300;
+        letter-spacing: 0.2px;
+
+      }
+    }
+
+    &.open {
+      .panel-project-item:before {
+        top: 31px;
+        background: url('/assets/images/small/arrow-up-grey.svg');
+        @include background-image (100% auto, center);
+      }
+    }
+
+    .panel-project-dropdown-menu {
+      width: 300px;
+      border-radius: 0 0 3px 3px;
+      border-top: 0;
+      margin: 0;
+      left: 0;
+      @include box-shadow (none);
+      .panel-project-dropdown-item {
+        width: 298px;
+        height: 38px;
+        padding:0;
+        margin: 0;
+        font-size: 14px;
+        a {
+          width: 100%;
+          height: 100%;
+          display: block;
+          text-decoration: none;
+          padding: 3px 20px;
+          margin: 0;
+
+          &:hover {
+            text-decoration: none;
+            background-color: $greyishwhite;
+          }
+
+          &:focus {
+            text-decoration: none;
+            outline: 0;
+          }
+
+
+          i {
+            height: 100%;
+            width: 30px;
+            display: block;
+            float: left;
+            margin-right: 20px;
+          }
+          p {
+            display: block;
+            float: left;
+            padding: 0;
+            margin:0;
+            margin-top: 6px;
+            font-size: 14px;
+            font-weight: 300;
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.panel-platform-wrapper {
+  display: none;
+  width: 210px;
+  height: 100%;
+  float: right;
+  border-left: 1px solid $header-border;
+  .panel-platform-holder {
+    height: 100%;
+    width: 100%;
+    .panel-platform-dropdown {
+      width:210px;
+      height: 100%;
+    }
+    .ms-parent {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+
+      .ms-choice {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        padding-left: 25px;
+        overflow: hidden;
+        cursor: pointer;
+        text-align: left;
+        font-family: $fontstack;
+        border: 0;
+        white-space: nowrap;
+        line-height: 26px;
+        color: $whitenotwhite;
+        text-decoration: none;
+        background-color: transparent;
+        &:focus {
+          outline: 0;
+        }
+        &.disabled {
+          background-color: #f4f4f4;
+          background-image: none;
+          cursor: default;
+        }
+        span {
+          top: 22px;
+          position: absolute;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+          padding-left: 45px;
+          font-weight: 300;
+          font-family: $fontstack;
+          font-size: 14px;
+          color: $whitenotwhite;
+        }
+
+        > div {
+          position: absolute;
+          top: 30px;
+          right: 20px;
+          width: 13px;
+          height: 10px;
+          background: url('/assets/images/small/arrow-down-grey.svg');
+          @include background-image (100% auto, center);
+          &.open {
+            top: 31px;
+            background: url('/assets/images/small/arrow-up-grey.svg');
+            @include background-image (100% auto, center);
+          }
+        }
+      }
+      .ms-drop {
+        width: 100%;
+        overflow: hidden;
+        display: none;
+        padding: 0;
+        margin-top: 0px;
+        position: absolute;
+        z-index: 3;
+        background: $white;
+        color: $black;
+        border: 1px solid $border-lighter;
+        border-radius: 0 0 3px 3px;
+        @include box-shadow(0 6px 12px rgba(0,0,0,.175));
+        ul {
+          overflow: auto;
+          margin: 0;
+          padding: 5px 0;
+
+          > li {
+            list-style: none;
+            display: list-item;
+            position: static;
+            height:40px;
+            padding: 3px 30px;
+            background-image: none;
+            label {
+              display: block;
+              white-space: nowrap;
+              margin-top: 8px;
+              font-family: $fontstack;
+              font-weight: 300;
+              input {
+                margin-right: 10px;
+                margin-top: -2px;
+              }
+            }
+          }
+        }
+        .ms-no-results {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+.panel-date-range-wrapper {
+  height: 100%;
+  float: right;
+  display: inline-block;
+  border-left: 1px solid $header-border;
+
+  .panel-date-range-holder {
+    height:36px;
+    width: 250px;
+    position: relative;
+    padding-left: 45px;
+    padding-right: 25px;
+    background-color: $white;
+    border: 1px solid $border-lighter;
+    border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+      background-color: $greyishwhite;
+    }
+    .date-range-calendar {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 6px;
+      left: 20px;
+      &.fa-calendar {
+        font-size: 20px;
+        color:$greyishblack;
+      }
+    }
+
+    .panel-date-range-picker {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding-top: 8px;
+      font-family: $fontstack;
+      font-size: 13px;
+      &:focus {
+        outline: 0;
+      }
+      > span {
+        font-size: 14px;
+        font-weight: 400;
+        color: $whitenotwhite;
+        &.invert-color {
+          color: $black;
+        }
+
+      }
+    }
+  }
+}
+
+.panel-user-wrapper {
+  width: 240px;
+  height: 100%;
+  float: right;
+  border-left: 1px solid $header-border;
+  .panel-user-holder {
+    width: 100%;
+    height: 100%;
+    padding: 22px 25px 0 25px;
+    .panel-user-item {
+      height: 100%;
+      width: 100%;
+      display: block;
+      position: relative;
+      &:focus, &:active {
+        outline: 0;
+      }
+      .panel-user-avatar {
+        height: 26px;
+        width: 26px;
+        display: inline-block;
+        margin-right: 8px;
+        border-radius: 3px;
+      }
+      .panel-user-name {
+        display: inline-block;
+        font-size: 12px;
+        font-family: $fontstack;
+        font-weight:400;
+        color: $whitenotwhite;
+        @include font-smoothing;
+      }
+      .arrow-down {
+        height: 8px;
+        width: 10px;
+        position: absolute;
+        top: 10px;
+        right: 0px;
+        background: url('/assets/images/small/arrow-down-grey.svg');
+        @include background-image (100% auto, center);
+      }
+    }
+    .panel-user-dropdown {
+      width: 100%;
+      margin: 0;
+      border-top: 0;
+      border-radius: 0 0 3px 3px;
+      border-color: $border-lighter;
+      .panel-user-dropdown-item {
+        height: 38px;
+        > a {
+          height: 100%;
+          padding: 10px 30px;
+          font-weight: 300;
+          &:hover {
+            background-color: $greyishwhite;
+          }
+
+          i {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 15px;
+            background-color: red;
+          }
+          p {
+            display: inline-block;
+            margin-top: -5px;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}
