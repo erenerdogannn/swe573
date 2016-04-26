@@ -76,6 +76,9 @@ function validateSignInForm() {
     var password = document.getElementById("signin-password").value;
     var atposition = email.indexOf("@");
     var dotposition = email.lastIndexOf(".");
+    
+    var cookieemail = document.cookie.split(';')[0].split('=')[1];
+    var cookiepassword = document.cookie.split(';')[1].split('=')[1];
 
     if (email==null || email=="") {
 
@@ -119,6 +122,18 @@ function validateSignInForm() {
         $('#signin-email').addClass('error');
         return false;
     };
+    
+    if (email == cookieemail && password == cookiepassword ) {
+        window.location.pathname = "/panel/forum.html";
+        return false;
+    } else if (email == "admin@admin.com" && password =="123456"){
+        window.location.pathname = "/panel/forum.html";
+        return false;
+    } else {
+        $('#signin-form .form-error').parent().css('display', 'block');
+        $('#signin-form .form-error').html('Kullanıcı kayıtlı bulunmamaktadır');
+        return false;
+    }
 
 }
 
@@ -132,11 +147,12 @@ function validateSignUpForm() {
     var atposition = email.indexOf("@");
     var dotposition = email.lastIndexOf(".");
     var term =  document.getElementById("term-checkbox");
+    
 
     if (name==null || name=="") {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Name must be filled out');
+        $('#signup-form .form-error').html('İsim doldurulmalı');
         $('#signup-name').addClass('error');
         return false;
 
@@ -145,7 +161,7 @@ function validateSignUpForm() {
     if (email==null || email=="") {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Mail must be filled out');
+        $('#signup-form .form-error').html('Mail doldurulmalı');
         $('#signup-email').addClass('error');
         return false;
 
@@ -153,7 +169,7 @@ function validateSignUpForm() {
 
     if (atposition< 1 || dotposition<atposition+2 || dotposition+2>=email.length) {
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Invalid Mail adress');
+        $('#signup-form .form-error').html('Geçersiz mail adresi');
         $('#signup-email').addClass('error');
         return false;
     };
@@ -161,7 +177,7 @@ function validateSignUpForm() {
     if (password==null || password=="") {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Password must be filled out');
+        $('#signup-form .form-error').html('şifre doldurulmalı');
         $('#signup-password').addClass('error');
         return false;
 
@@ -170,7 +186,7 @@ function validateSignUpForm() {
     if (confPassword==null || confPassword=="") {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Confirm Password must be filled out');
+        $('#signup-form .form-error').html('Şifreyi onayla doldurulmalı');
         $('#signup-password').addClass('error');
         return false;
 
@@ -179,7 +195,7 @@ function validateSignUpForm() {
     if (password.length < 6) {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Password should be min. 6 character');
+        $('#signup-form .form-error').html('Şifre en az 6 karakter olmalıdır');
         $('#signup-password').addClass('error');
         return false;
 
@@ -188,7 +204,7 @@ function validateSignUpForm() {
     if (password.length > 32) {
 
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html('Password should be max. 32 character');
+        $('#signup-form .form-error').html('Şifre en fazla 32 karakter olmalıdır');
         $('#signup-password').addClass('error');
         return false;
 
@@ -197,7 +213,7 @@ function validateSignUpForm() {
 
     if (password !== confPassword) {
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html("Password and Confirm Password doesn't match");
+        $('#signup-form .form-error').html("Şifre ve Tekrar şifre bölümleri farklıdır");
         $('#signup-confirm-password').addClass('error');
         return false;
     }
@@ -205,9 +221,16 @@ function validateSignUpForm() {
     // Term checkbox check
     if (term.checked == false) {
         $('#signup-form .form-error').parent().css('display', 'block');
-        $('#signup-form .form-error').html("You have to agree with terms in order to proceed.");
+        $('#signup-form .form-error').html("Üyelik koşullarını onaylamalısınız");
         return false;
     }
+    
+   
+    document.cookie="mail=" + email + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie="password=" + password + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    
+    window.location.pathname = "/panel/forum.html";
+    return false;
 }
 
 //Send Recovery mail page

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% set title %}
+        {% trans 'Placement' %}
+    {% endset %}
+
+    {% include 'panel/inc/header.html.twig' with {'title': title } %}
+
+    <link rel="stylesheet" href="/assets/stylesheets/bootstrap-editable.css" type='text/css'>
+</head>
+
+<body class="preload body-panel">
+<div class="panel-wrapper">
+
+    {% include 'panel/inc/sidebar.html.twig' with {'menu': 'placements'} %}
+
+    <div class="panel-content-wrapper without-header">
+        <div class="panel-content-holder without-header">
+
+            {% include 'panel/inc/alert.html.twig' %}
+
+            <div class="panel-content-widget xlg border-bottom">
+                <ul class="panel-content-heading-holder">
+                    <li class="panel-content-heading-item"><a href="#" class="current">{% trans %}
+                            Placement Detail{% endtrans %}</a></li>
+                </ul>
+            </div>
+
+            <div class="panel-content-widget xlg" style="padding-top: 35px; padding-bottom: 35px;">
+                <a href="#" id="campaign-name" data-toggle="modal"
+                   data-target="#change-name-modal">
+                    {{ campaign.campaign_name }}<i class="fa fa-pencil"></i>
+                </a>
+
+                <div class="onoffswitch-holder" id="campaign-status-holder">
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox " id="campaign-status"
+                               {% if campaign.status == 1 %}checked="checked"{% endif %}>
+                        <label class="onoffswitch-label" for="campaign-status">
+                            <span class="onoffswitch-inner">
+                                <span class="onoffswitch-active"><span class="onoffswitch-switch">RUNNING</span></span>
+                                <span class="onoffswitch-inactive"><span class="onoffswitch-switch">PAUSED</span></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-content-widget xlg" style="padding: 5px 20px;">
+                <div class="campaign-links-holder">
+                    <h2 class="widget-heading">Output Links/Codes</h2>
+
+                    <div class="campaign-textbox-holder">
+                        <label class="form-label" style="display: block;">{% trans %}Domain{% endtrans %}</label>
+
+                        <div class="select-box-holder left" id="campaign-domain-select-holder">
+                            <select class="select-box domain-name" id="campaign-domain-select-box">
+                                {% if campaign.default_domain == 0 %}
+                                    <option value="0" selected>Default</option>
+                                {% else %}
+                                    <option value="0">Default</option>
+                                {% endif %}
+                                {% for domain in domains %}
+                                    {% if campaign.default_domain == domain.id %}
+                                        <option value="{{ domain.id }}" selected>{{ domain.domain }}</option>
+                                    {% else %}
+                                        <option value="{{ domain.id }}">{{ domain.domain }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+
+                            <br style="clear: both"/>
+                            <br style="clear: both"/>
+
+                            {% if campaign.campaign_type == 'DIRECT' %}
+                                <label class="form-label" style="display: block;">{% trans %}Redirection
+                                    Type{% endtrans %}</label>
+
+                                <select class="select-box domain-name" id="campaign-redirect-type-select-box">
+                                    <option value="0">Header Redirection</option>
+                                    <option value="1">Meta Refresh Redirection</option>
+                                    <option value="2">Javascript Redirection</option>
+                                </select>
+                            {% endif %}
+                        </div>
+
+
+                        {% if campaign.campaign_type == 'DIRECT' %}
+                            <label class="form-label">{% trans %}URL{% endtrans %}</label>
+                            <input class="form-text" id="link-area" type="text"
+                                   value="http://{{ campaign.domain }}/r/{{ campaign.short_code }}"
+                                   onClick="this.select();" readonly>
+                        {% endif %}
+                    </div>
+                    <div class="campaign-textbox-holder">
+                        <label class="form-label">{% trans %}JavaScript{% endtrans %}</label>
+                        <textarea id="js-area" class="form-text-area" onClick="this.select();" readonly><script src="http://{{ campaign.domain }}/j/{{ campaign.short_code }}"></script></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel-content-widget xlg" style="padding-top: 30px;">
+                <h2 class="widget-heading">Rules</h2>
+                <hr/>
+                <div class="panel-table-holder">
+                    <button class="button button-sm button-blue" id="add-rule">
+                        {% trans %}Add New Rule{% endtrans %}
+                    </button>
+                    <table id="campaign-detail-table" class="table table-project table-striped">
+                        <thead>
+                        <tr>
+                            <th class="" width="75">
+                            </th>
+                            <th class="">
+                                {% trans %}Name{% endtrans %}
+                            </th>
+                            <th class="">
+                                {% trans %}Country{% endtrans %}
+                            </th>
+                            <th class="">
+                                {% trans %}Carrier{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="">
+                                {% trans %}Device Type{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="">
+                                {% trans %}OS{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="">
+                                {% trans %}Language{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="">
+                                {% trans %}Browser{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="">
+                                {% trans %}URL{% endtrans %}
+                                <span></span>
+                            </th>
+                            <th class="" width="120">
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="rules-body">
+                        {% for rule in rules %}
+                            <tr id="rule-{{ rule.id }}" data-id="{{ rule.id }}">
+                                <td class="mover">
+                                    <i class="fa fa-arrows"></i>
+
+                                    <p class="priority"></p>
+                                </td>
+                                <td>
+                                    <a href="#" class="name" data-type="text" data-pk="{{ rule.id }}"
+                                       data-title="Enter name">{{ rule.name }}</a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td>
+                                    <a href="#" class="xeditable" data-z="countries" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.countries|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td class="">
+                                    <a href="#" class="xeditable" data-z="carriers" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.carriers|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td class="">
+                                    <a href="#" class="xeditable" data-z="devices" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.devices|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td class=" ">
+                                    <a href="#" class="xeditable" data-z="oss" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.oss|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td class="">
+                                    <a href="#" class="xeditable" data-z="languages" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.languages|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td class="">
+                                    <a href="#" class="xeditable" data-z="browsers" data-type="select2"
+                                       data-pk="{{ rule.id }}" data-selected="{{ rule.browsers|join(',') }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+                                <td>
+                                    <a href="#" class="address" data-value='{{ rule.urls|json_encode()|raw }}'
+                                       data-type="address"
+                                       data-pk="{{ rule.id }}"></a>
+                                    <i class="fa fa-pencil"></i>
+                                </td>
+
+                                <td class="project-button-holder ">
+                                    <a class="delete-rule-button" href="#">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                        <tbody>
+                        <tr id="rule-default" data-id="default">
+                            <td>
+
+                            </td>
+                            <td>
+                                Default
+                            </td>
+                            <td>
+                                No Restrict
+                            </td>
+                            <td class="">
+                                No Restrict
+                            </td>
+                            <td class="">
+                                No Restrict
+                            </td>
+                            <td class="">
+                                No Restrict
+                            </td>
+                            <td class=" ">
+                                No Restrict
+                            </td>
+                            <td class="">
+                                No Restrict
+                            </td>
+                            <td>
+                                <a href="#" class="address" data-value='{{ default_url|json_encode()|raw }}'
+                                   data-type="address"
+                                   data-pk="default"></a>
+                                <i class="fa fa-pencil"></i>
+
+                                <div class="rule-options"></div>
+                            </td>
+
+                            <td class="project-button-holder ">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="button button-green button-sm disabled" id="save" disabled="disabled">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading-overlay" id="campaign-loading">
+        <div class="loading-gif"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></div>
+    </div>
+</div>
+
+
+<!-- Change Campaign Name Modal -->
+<div class="modal fade" id="change-name-modal" role="dialog" aria-labelledby="trackersModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="trackersModalLabel">{% trans %}Change Placement Name{% endtrans %}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-message-holder">
+                    <span class="form-error"></span>
+                </div>
+                <div class="modal-form-holder">
+                    <form class="modal-form-group" id="name_change" method="POST"
+                          action="/panel/placement/name/{{ campaign.id }}"
+                            >
+                        <div class="modal-form-item">
+                            <label class="form-label" for="change-campaign-name">
+                                {% trans %}Change Placement Name{% endtrans %}
+                            </label>
+                            <input class="form-text" id="change-campaign-name" name="name"
+                                   placeholder="{{ campaign.campaign_name }}" type="text" required
+                                   autofocus>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="$('#name_change').submit();"
+                        class="button button-md button-blue center">{% trans %}Change Name{% endtrans %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<form method="post" action="/panel/placements/rules/save/{{ campaign.id }}" id="post_form">
+    <input type="hidden" name="rules" id="post_rules">
+</form>
+
+{% include 'panel/inc/footer.html.twig' %}
+
+<script src="/assets/javascript/bootstrap-editable.js"></script>
+<script src="/assets/javascript/url-bootstrap-editable.js"></script>
+<script src="/assets/javascript/jquery-ui.min.js"></script>
+<script>
+    if (!Object.prototype.watch) {
+        Object.defineProperty(Object.prototype, "watch", {
+            enumerable: false
+            , configurable: true
+            , writable: false
+            , value: function (prop, handler) {
+                var
+                        oldval = this[prop]
+                        , getter = function () {
+                            return oldval;
+                        }
+                        , setter = function (newval) {
+                            if (oldval !== newval) {
+                                handler.call(this, prop, oldval, newval);
+                                oldval = newval;
+                            }
+                            else {
+                                return false
+                            }
+                        }
+                        ;
+
+                if (delete this[prop]) { // can't watch constants
+                    Object.defineProperty(this, prop, {
+                        get: getter
+                        , set: setter
+                        , enumerable: true
+                        , configurable: true
+                    });
+                }
+            }
+        });
+
+
+        if (!Object.prototype.unwatch) {
+            Object.defineProperty(Object.prototype, "unwatch", {
+                enumerable: false
+                , configurable: true
+                , writable: false
+                , value: function (prop) {
+                    var val = this[prop];
+                    delete this[prop]; // remove accessors
+                    this[prop] = val;
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+    // Stops animation bug at the beggining (important)
+    $(window).load(function () {
+        $("body").removeClass("preload");
+    });
+
+    var current_domain = "{{ campaign.domain }}";
+
+
+    var campaign_type = '{{ campaign.campaign_type }}';
+    var apps = [{% for app in apps %} {id: {{ app.id}}, name: '{{ app.app_name }}'}, {% endfor %}];
+    var offers = [{% for offer in offers %} {id: {{ offer.id}}, name: '{{ offer.offer_name }}'}, {% endfor %}];
+    var endpoints = [{% for endpoint in endpoints %} {
+        id: {{ endpoint.id}},
+        offers_id: {{ endpoint.offers_id }},
+        name: '{{ endpoint.endpoint_name}}',
+        type: '{{ endpoint.endpoint_type}}'
+    }, {% endfor %}];
+
+    var domains = {};
+
+    {% for domain in domains %}
+    domains[{{ domain.id }}] = '{{ domain.domain }}';
+    {% endfor %}
+
+    var rules = {};
+    var is_changed = {p: false};
+    var is_changed_settings = {p: false};
+    var nonsave = true;
+
+    is_changed.watch("p", function (id, oldval, newval) {
+        $("#save").removeClass("disabled");
+        $("#save").prop("disabled", false);
+    });
+
+    is_changed_settings.watch("p", function (id, oldval, newval) {
+        console.log(newval);
+        if (newval) {
+            $("#settings-save").removeClass("disabled");
+            $("#settings-save").prop("disabled", false);
+        } else {
+            console.log("hide");
+            $("#settings-save").text("Saved!");
+            setTimeout(function () {
+                $("#settings-save").text("Save");
+            }, 3000);
+
+        }
+    });
+
+    function myConfirmation() {
+        if (is_changed.p && nonsave)
+            return 'You have unsaved changes, are you sure to exit ?';
+    }
+
+    window.onbeforeunload = myConfirmation;
+
+    $("#noredirect").on('change', function () {
+        is_changed_settings.p = true;
+
+        if ($(this).is(":checked")) {
+            $(".rotation-opts").css("visibility", "visible");
+        } else {
+            $(".rotation-opts").css("visibility", "hidden");
+        }
+    });
+
+    $("#noredirect_value").on('keypress', function () {
+        is_changed_settings.p = true;
+    });
+
+    $("#rotation").on('change', function () {
+        is_changed_settings.p = true;
+    });
+
+    $("#settings-save").click(function () {
+        $("#settings-save").addClass("disabled");
+        $("#settings-save").prop("disabled", true);
+        $("#settings-save").text("Saving..");
+
+        $.post("/panel/placement/change-settings/{{ campaign.id }}", {
+            rotation: $("#rotation").is(":checked"),
+            noredirect: $("#noredirect").is(":checked"),
+            noredirect_value: $("#noredirect_value").val()
+        }).always(function () {
+            is_changed_settings.p = false;
+        });
+    });
+
+    $(function () {
+        $(document).on('click', '.delete-item-button', function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        })
+    });
+
+    $(function () {
+        /// campaign detail \\\
+
+        // vars
+        var domain = "http://e.smartclick.io/";
+        var rnd = 0;
+
+
+        var countries = [];
+        var languages = [];
+        var devices = [];
+        var browsers = [];
+        var oss = [];
+        var carriers = [];
+
+        // -----
+
+        // elements
+        var domain_selectbox = $("#campaign-domain-select-box").select2({
+            placeholder: "{% trans %}Choose a Domain{% endtrans %}"
+        });
+
+        var redirect_type_selectbox = $("#campaign-redirect-type-select-box").select2({
+            placeholder: "{% trans %}Choose a Type{% endtrans %}"
+        });
+
+
+        // drag&drop
+        $("#rules-body").sortable({
+            cursor: 'move',
+            handle: ".mover",
+            update: resort
+        });
+        // -----
+
+
+        $.each(mapping_countries, function (k, v) {
+            countries.push({id: k, text: v});
+        });
+        $.each(mapping_languages, function (k, v) {
+            languages.push({id: k, text: v});
+        });
+        $.each(mapping_devices, function (k, v) {
+            devices.push({id: k, text: v});
+        });
+        $.each(mapping_browsers, function (k, v) {
+            browsers.push({id: k, text: v});
+        });
+        $.each(mapping_oss, function (k, v) {
+            oss.push({id: k, text: v});
+        });
+        $.each(mapping_carriers, function (k, v) {
+            carriers.push({id: k, text: v});
+        });
+
+        {% for rule in rules %}
+        rules[{{ rule.id }}] = {
+            priority: 0,
+            name: "{{ rule.name }}",
+            countries: JSON.parse('{{ rule.countries|json_encode()|raw }}'),
+            carriers: JSON.parse('{{ rule.carriers|json_encode()|raw }}'),
+            devices: JSON.parse('{{ rule.devices|json_encode()|raw }}'),
+            oss: JSON.parse('{{ rule.oss|json_encode()|raw }}'),
+            languages: JSON.parse('{{ rule.languages|json_encode()|raw }}'),
+            browsers: JSON.parse('{{ rule.browsers|json_encode()|raw }}'),
+            urls: JSON.parse('{{ rule.urls|json_encode()|raw }}')
+        };
+        {% endfor %}
+
+        rules['default'] = {
+            urls: JSON.parse('{{ default_url|json_encode()|raw }}')
+        }
+
+
+        // -----
+
+        // events
+
+        var status_loading = true;
+
+        $("#campaign-status").on('change', function (event) {
+            var elem = $(this);
+
+            if (status_loading) {
+                status_loading = false;
+                elem.prop("disabled", true);
+            }
+
+            $.get("/panel/placement/change-status/{{ campaign.id }}", function () {
+                status_loading = true;
+                elem.prop("disabled", false);
+            });
+        });
+
+        var domain_change = function (e) {
+            domain = "";
+            $.get("/panel/placement_domain/{{ campaign.id }}?domains_id=" + e.val);
+
+            if (e.val == "0") {
+                current_domain = "e.smartclick.io";
+                domain = "http://e.smartclick.io/";
+            } else {
+                current_domain = domains[e.val];
+                domain = "http://" + domains[e.val] + "/";
+            }
+
+
+            $("#link-area").val(domain + "r/" + "{{ campaign.short_code }}");
+            $("#js-area").val("<script src='" + domain + "j/{{ campaign.short_code }}'></scr" + "ipt>");
+        }
+
+        // domain change
+        domain_selectbox.on("change", domain_change);
+
+        //redirect type change
+        redirect_type_selectbox.on("change", function (e) {
+            var old_value = $("#link-area").val();
+            if (e.val == 0)
+                $("#link-area").val("http://" + current_domain + "/r" + "/" + "{{ campaign.short_code }}");
+            else
+                $("#link-area").val("http://" + current_domain + "/r" + "/" + "{{ campaign.short_code }}?r=" + e.val);
+        });
+
+
+        // adds new rule
+        $("#add-rule").click(function () {
+
+
+            $("#rules-body").append('' +
+                    '<tr id="rule-n' + rnd + '" data-id="n' + rnd + '">' +
+                    '<td class="mover"><i class="fa fa-arrows"></i><p class="priority">1</p></td>' +
+                    '<td> <a href="#" class="name" data-type="text" data-pk="n' + rnd + '" data-title="Enter name">{{ rule.name }}</a><i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="countries" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="carriers" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="devices" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="oss" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="languages" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="xeditable" data-z="browsers" data-type="select2" data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td><a href="#" class="address" data-type="address"  data-pk="n' + rnd + '"></a> <i class="fa fa-pencil"></i></td>' +
+                    '<td class="project-button-holder "><a class="delete-rule-button" href="#" data-id="n' + rnd + '"> <i class="fa fa-trash-o"></i></a></td>' +
+                    '</tr>');
+
+            rules["n" + rnd] = {
+                priority: 0,
+                name: "",
+                countries: [],
+                carriers: [],
+                devices: [],
+                oss: [],
+                languages: [],
+                browsers: [],
+                urls: {
+                    is_rotate: false,
+                    is_rotate: false,
+                    is_noredirect: false,
+                    noredirect_value: "",
+                    data: []
+                }
+            };
+            rnd++;
+
+            xeditable_rules();
+            is_changed.p = true;
+
+        });
+
+        // deletes rule
+        $('#rules-body').on('click', '.delete-rule-button', function (e) {
+            e.preventDefault();
+            is_changed.p = true;
+            var that = $(this);
+            rules[that.closest('tr').attr("data-id")] = "deleted";
+            that.closest('tr').remove();
+            resort();
+        });
+
+
+        // drag & drop
+
+        $("#rules-body tbody tr").draggable({
+            appendTo: "body",
+            helper: "clone"
+        });
+        $("#rules-body tbody").droppable({
+            activeClass: "ui-state-default",
+            hoverClass: "ui-state-hover",
+            accept: ":not(.ui-sortable-helper)",
+            drop: function (event, ui) {
+                $('.placeholder').remove();
+                row = ui.draggable;
+                $(this).append(row);
+            }
+        });
+
+        xeditable_rules();
+
+
+        /**
+         * Edits .priority with suitable values.
+         */
+        function resort() {
+            $('#rules-body tr').each(function (i, obj) {
+                $(obj).find(".priority").html(i + 1);
+                rules[$(obj).attr("data-id")].priority = i + 1;
+            });
+        };
+
+
+        /**
+         * Re-render xeditable areas
+         */
+        function xeditable_rules() {
+
+            $(".xeditable").each(function () {
+                var data;
+                var message;
+                var type = $(this).attr("data-z");
+                var id = $(this).attr("data-pk");
+
+                switch (type) {
+                    case 'carriers':
+                        data = carriers;
+                        message = "Carrier";
+                        break;
+                    case 'countries':
+                        data = countries;
+                        message = "Country"
+                        break;
+                    case 'devices':
+                        data = devices;
+                        message = "Device";
+                        break;
+                    case 'browsers':
+                        data = browsers;
+                        message = "Browser";
+                        break;
+                    case 'oss':
+                        data = oss;
+                        message = "Operating System";
+                        break;
+                    case 'languages':
+                        data = languages;
+                        message = "Language";
+                        break;
+                }
+
+                if (type == 'carriers') {
+
+                    $(this).editable({
+                        source: data,
+                        select2: {
+                            width: 200,
+                            placeholder: '{% trans %}Select{% endtrans %} ' + message,
+                            allowClear: true,
+                            multiple: true,
+                            ajax: {
+                                url: '/carriers',
+                                dataType: 'json',
+                                data: function () {
+                                    return {countries: rules[id]["countries"]};
+                                },
+                                results: function (data) {
+                                    return {results: data};
+                                }
+                            },
+                            formatResult: function (item) {
+                                return item.text;
+                            },
+                            formatSelection: function (item) {
+                                return item.text;
+                            },
+                            initSelection: function (element, callback) {
+                                console.log(element.val());
+                                var _carriers = [];
+
+                                element.val().split(",").forEach(function (value) {
+                                    $.each(mapping_carriers, function (index, _value) {
+                                        if (index == value)
+                                            _carriers.push({id: index, text: _value});
+                                    });
+                                });
+
+                                console.log(_carriers);
+                                callback(_carriers);
+                            }
+                        },
+                        emptytext: "No Restrict",
+                    }).on('save', function (e, params) {
+                        is_changed.p = true;
+                        rules[$(e.target).attr("data-pk")][$(e.target).attr("data-z")] = params.newValue;
+                    });
+
+                } else {
+                    $(this).editable({
+                        source: data,
+                        select2: {
+                            width: 200,
+                            placeholder: '{% trans %}Select{% endtrans %} ' + message,
+                            allowClear: true,
+                            multiple: true
+                        },
+                        emptytext: "No Restrict",
+                    }).on('save', function (e, params) {
+                        is_changed.p = true;
+                        rules[$(e.target).attr("data-pk")][$(e.target).attr("data-z")] = params.newValue;
+                    });
+                }
+            });
+
+            $('.address').editable({
+                showbuttons: 'bottom',
+                placement: 'left',
+                validate: function (value) {
+                }
+            }).on('save', function (e, params) {
+                is_changed.p = true;
+                rules[$(e.target).attr("data-pk")]['urls'] = params.newValue;
+            });
+
+
+            $('.name').editable().on('save', function (e, params) {
+                is_changed.p = true;
+                rules[$(e.target).attr("data-pk")]['name'] = params.newValue;
+            });
+
+
+            resort();
+
+            $('#rules-body td').each(function () {
+                var cell = $(this);
+                cell.width(cell.width());
+            });
+        }
+
+
+        /**
+         * Serializes data and sends to backend
+         */
+        $("#save").click(function () {
+            nonsave = false;
+            $("#post_rules").val(JSON.stringify(rules));
+            $("#post_form").submit();
+        });
+
+        resort();
+
+
+    });
+
+
+</script>
+</body>
+</html>

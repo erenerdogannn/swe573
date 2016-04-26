@@ -23,24 +23,24 @@
                 <a href="index.html"><img src="/assets/images/unikoop_logo.png" class="logo"></a>
             </div>
             <div class="sign-form-holder">
-                <form class="sign-form-group" role="signin" id="signin-form" method="POST"
-                      onsubmit="">
+                <form class="sign-form-group" role="signin" id="signin-form" 
+                      onsubmit="return validateSignInForm()">
                     <div class="sign-heading-holder">
                         <h2 class="form-heading">GİRİŞ YAP</h2>
                     </div>
-                    <div class="sign-message-holder" style="display:block !important;" >
+                    <div class="sign-message-holder" style="" >
                         <span class="form-error">error</span>
                     </div>
-                    <div class="sign-message-holder"style="display:block !important;">
+                    <div class="sign-message-holder"style="">
                         <span class="form-success">success</span>
                     </div>
                     <div class="sign-form-item-holder">
                         <div class="sign-form-item">
-                            <input type="email" name="email" class="form-text" id="signin-email" placeholder="Mail Adresiniz"
+                            <input type="email" name="" class="form-text" id="signin-email" placeholder="Mail Adresiniz"
                                    autofocus>
                         </div>
                         <div class="sign-form-item">
-                            <input type="password" name="passwd" class="form-text" id="signin-password"
+                            <input type="password" name="" class="form-text" id="signin-password"
                                    placeholder="Şifre">
                             <!-- <span class="form-sub-info clickable"><a href="">Şifremi Unuttum?</a></span> -->
                         </div>
@@ -62,16 +62,11 @@
     </div>
 </div>
 
-</footer>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/assets/javascript/bootstrap.min.js"></script>
-
-<!-- moment.js -->
-<script src="/assets/javascript/moment.min.js"></script>
 
 <!-- main.js -->
 <script src="/assets/javascript/main.js"></script>
@@ -81,12 +76,6 @@
     $(window).load(function () {
         $("body").removeClass("preload");
     });
-</script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
-<script>
-    var timezone = jstz.determine();
-    $.cookie('timezone', timezone.name(), {expires: 7, path: '/'});
 </script>
 
 </body>
