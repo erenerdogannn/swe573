@@ -77,8 +77,10 @@ function validateSignInForm() {
     var atposition = email.indexOf("@");
     var dotposition = email.lastIndexOf(".");
     
+    if (document.cookie.length > 0) {
     var cookieemail = document.cookie.split(';')[0].split('=')[1];
     var cookiepassword = document.cookie.split(';')[1].split('=')[1];
+    }
 
     if (email==null || email=="") {
 
@@ -123,10 +125,10 @@ function validateSignInForm() {
         return false;
     };
     
-    if (email == cookieemail && password == cookiepassword ) {
+    if (email == "admin@admin.com" && password == "123456")  {
         window.location.pathname = "/panel/forum.html";
         return false;
-    } else if (email == "admin@admin.com" && password =="123456"){
+    } else if (email == cookieemail && password == cookiepassword ){
         window.location.pathname = "/panel/forum.html";
         return false;
     } else {
