@@ -13,26 +13,25 @@ import java.util.Date;
 @Data
 @Entity
 public class Announcement {
+
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     private String name;
 
     private Date announcementDate;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "TEXT")
     private String info;
 
+    @Column(columnDefinition = "VARCHAR(2048)")
+    private String PhotoURL;
+
     @ManyToOne
-    @JsonIgnore
     private Product product;
 
     @ManyToOne
-    @JsonIgnore
     private Producer producer;
 
-    /*
-    * private String PhotoURL;
-    * */
 }

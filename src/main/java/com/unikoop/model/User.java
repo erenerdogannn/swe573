@@ -1,9 +1,11 @@
 package com.unikoop.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,27 +17,21 @@ public class User {
 
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     @Column(columnDefinition = "VARCHAR(2048)")
     private String name;
 
     @Email
     private String email;
-
     private String password;
     private String job;
-    private String telephone;
     private String userType;
 
-
-    @OneToMany(mappedBy = "user")
-    private List<ForumTopic> forumTopics;
+    private String photoURL;
 
     @OneToMany(mappedBy = "user")
     private List<WorkSlot> workSlots;
 
-    /*
-    private String photoURL;
-     */
+
 }

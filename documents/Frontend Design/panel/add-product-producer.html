@@ -44,12 +44,6 @@
                     </a>
                 </li>
                 <li class="panel-sidebar-item">
-                    <a  href="/panel/forum.html">
-                        <figure id=""></figure>
-                        <h5>FORUM</h5>
-                    </a>
-                </li>
-                <li class="panel-sidebar-item">
                     <a href="/panel/volunteer.html">
                         <figure id=""></figure>
                         <h5>GÖNÜLLÜ OL</h5>
@@ -137,7 +131,7 @@
             </div>
 
             <div class="user-logout-holder">
-                <a href="/main/index.html"
+                <a id="sign-out-btn"
                    class="button button-verythin a button-red  button-xs right user-logout-button">Çıkış Yap</a>
             </div>
 
@@ -188,91 +182,86 @@
             <div class="tab-content">
 
                 <div id="info-content" class="xlg tab-pane fade in active ">
-                    <form class="settings-info-holder" method="post">
+                    
+                    <form id="add-product" class="settings-info-holder" method="post">
                         <div class="settings-form-item">
                             <label class="form-label">Üretici</label>
-                            <select name='currency' id="currency" class="form-text" style="width: 30%;">
-                                <option value='AED' title='United Arab Emirates Dirham'>Palivor</option>
-                                <option value='AFN' title='Afghan Afghani'>Ahmet Efendi</option>
-                                <option value='ALL' title='Albanian Lek'>Ali Bey</option>
+                            <select name="product-producer" class="form-text" style="width: 30%;">
+                                <option value='' title=''>Palivor</option>
+                                <option value='' title=''>Palivor</option>
+                                <option value='' title=''>Ahmet Efendi</option>
                             </select>
                         </div>
-
                         <div class="settings-form-item">
-                            <label class="form-label">Ürün Adı </label>
-                            <input class="form-text" name="name" value="">
+                            <label class="form-label">Ürün Adı</label>
+                            <input id="product-name" class="form-text" name="" value="">
                         </div>
                         <div class="settings-form-item">
                             <label class="form-label">Yöre</label>
-                            <input class="form-text " name="email" value="">
-                        </div>
-                        <div class="settings-form-item">
-                            <label class="form-label">Üretim Tarihi</label>
-                            <input class="form-text " name="company" value="">
+                            <input id="product-region" class="form-text " name="" value="">
                         </div>
                         <div class="settings-form-item">
                             <label class="form-label">Açıklama</label>
-                            <input class="form-text " name="title" value="">
+                            <input id="product-info" class="form-text " name="" value="">
                         </div>
-                        
                         <div class="settings-form-item">
                             <label class="form-label">Ölçü Birimi</label>
-                            <select name='currency' id="currency" class="form-text" style="width: 30%;">
-                                <option value='kg' title='United Arab Emirates Dirham'>kg</option>
-                                <option value='lt' title='Afghan Afghani'>lt</option>
+                            <select id="product-measurement" class="form-text" name="" style="width: 30%;">
+                                <option value='kg' title='kg'>kg</option>
+                                <option value='gr' title='gr'>gr</option>
+                                <option value='lt' title='lt'>lt</option>
                             </select>
                         </div>
                         <div class="settings-form-item">
                             <label class="form-label">Paketli</label>
-                            <select name='' id="" class="form-text" style="width: 30%;">
+                            <select id="product-ispackaged" class="form-text" name="" style="width: 30%;" onchange="getVal(this)">
+                                <option value='empty' title=''>Seçiniz</option>
                                 <option value='yes' title=''>Evet</option>
                                 <option value='no' title=''>Hayır</option>
                             </select>
                         </div>
-                        <div class="settings-form-item">
+                        <div class="settings-form-item product-packaged product-package-size-container noshow">
                             <label class="form-label">Paket Büyüklüğü</label>
-                            <input class="form-text " name="title" value="">
+                            <input id="product-package-size" class="form-text" name="" value="">
                         </div>
-                        <div class="settings-form-item">
+                        <div class="settings-form-item product-packaged product-num-package-container noshow">
                             <label class="form-label">Paket Sayısı</label>
-                            <input class="form-text " name="title" value="">
+                            <input id="product-num-package" class="form-text" name="" value="">
                         </div>
-                        <div class="settings-form-item">
-                            <label class="form-label">Fiyat</label>
-                            <input class="form-text " name="title" value="">
-                        </div>
-                        <div class="settings-form-item">
+                        <div class="settings-form-item product-nonpackaged product-total-amount-container noshow">
                             <label class="form-label">Toplam Ürün Miktarı</label>
-                            <input class="form-text " name="title" value="">
+                            <input id="product-total-amount" class="form-text" name="" value="">
                         </div>
-                        <div class="settings-form-item">
-                            <label class="form-label">Birim Fiyatı</label>
-                            <input class="form-text " name="title" value="">
+                        <div class="settings-form-item product-nonpackaged product-price-container noshow">
+                            <label class="form-label">Fiyat</label>
+                            <input id="product-unit-price" class="form-text" name="" value="">
                         </div>
                         
                         <div class="panel-content-widget xlg">
                             <!-- EMPTY PLACE-->
                         </div>
                         <div class="panel-content-widget xlg">
-                            <button class="button button-green button-md center">Ürün Ekle</button>
+                            <button id="add-product-btn" class="button button-green button-md center">Ürün Ekle</button>
                         </div>
                     </form>
+                    
                 </div>
 
 
                 <div id="domains-content" class="xlg tab-pane fade ">
-                     <form class="settings-info-holder" method="post">
+                    
+                     <form id="add-producer" class="settings-info-holder" method="post">
                         <div class="settings-form-item">
                             <label class="form-label">Üretici Adı </label>
-                            <input class="form-text" name="name" value="">
+                            <input id="producer-name" class="form-text" name="" value="">
                         </div>
                         <div class="settings-form-item">
                             <label class="form-label">Üretici Yeri</label>
-                            <input class="form-text " name="email" value="">
+                            <input id="producer-place" class="form-text" name="" value="">
                         </div>
                         <div class="settings-form-item">
                             <label class="form-label">Üretici Açıklama</label>
-                            <input class="form-text " name="company" value="">
+                            <input id="producer-info" class="form-text" name="" value="">
                         </div>
 
                         <div class="panel-content-widget xlg">
@@ -282,100 +271,15 @@
                             <button class="button button-green button-md center">Üretici Ekle</button>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         <div class="panel-content-widget xlg"></div>
         <div class="panel-content-widget xlg"></div>
-
-            
-                <!-- EMPTY MESSAGE 
-                <div class="panel-content-widget xlg">
-                    <div class="start-project-holder">
-                        <h3 class="main-message">Hiç bir ürününüz yok lütfen ürün ekleyin.</h3>
-                        <button class="button button-md button-green center" data-toggle="modal"
-                                data-target="#add-project-modal">START HERE
-                        </button>
-                    </div>
-                </div>
-                 EMPTY MESSAGE END -->
         </div>
+        
     </div>
 </div>
-
-<!-- Add Campaign Modal -->
-<div class="modal fade" id="add-project-modal" role="dialog" aria-labelledby="trackersModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="trackersModalLabel">Konu Yarat</h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal-message-holder">
-                    <span class="form-error"></span>
-                </div>
-                <div class="modal-form-holder">
-                    <form class="modal-form-group" id="project-add-form" method="POST"
-                          onsubmit="return validateAddProject();">
-                        <div class="modal-form-item">
-                            <label class="form-label" for="project-name">Placement Name
-                            </label>
-                            <input class="form-text" id="project-name" name="name" type="text" required
-                                   autofocus>
-                            <span class="form-sub-info">min. 4 - max. 32 characters</span>
-                        </div>
-                        <div class="modal-form-item">
-                            <label class="form-label" for="project-name">Placement Type
-                            </label>
-                            <select class="form-control" style="width: 80%; margin: 0 auto;" name="campaign_type">
-                                <option value="DIRECT">DIRECT</option>
-                                <option value="JAVASCRIPT">JAVASCRIPT</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="$('#project-add-form').submit();"
-                        class="button button-md button-blue center">Add Placement
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
-
-<!-- Delete Campaign Modal -->
-<div class="modal fade" id="delete-project-modal" role="dialog" aria-labelledby="trackersModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="trackersModalLabel">Delete Placement</h4>
-            </div>
-            <div class="modal-body">
-                
-                <div class="modal-message-holder">
-                    <span class="form-error"></span>
-                </div>
-                <div class="modal-text-holder">
-                    <p class="modal-text center-txt" style="font-size: 19px; margin-bottom: 0px;">
-                         Are you sure to delete placement ?</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a id="campaign_delete_url" href=""
-                   class="button a button-md button-red center">Delete Placement
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
 
 
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
@@ -393,9 +297,7 @@
 <script src="/assets/javascript/jdata.js"></script>
 <script src="/assets/javascript/main.js"></script>
 <script src="/assets/javascript/pace.min.js"></script>
-
 <script src="/assets/javascript/mappings.js"></script>
-
 <script src="/assets/javascript/jquery.ui.widget.js"></script>
 <script src="/assets/javascript/bootstrap-select.min.js"></script>
 <script src="/assets/javascript/jquery.iframe-transport.js"></script>
@@ -413,13 +315,40 @@
     };
 </script>
 
+    
 <script>
-    $('#delete-project-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var modal = $(this)
-        modal.find('#campaign_name').html(button.data('cname'))
-        modal.find('#campaign_delete_url').attr("href", button.data('url'))
-    })
+    
+    var selectedValue = $('#product-ispackaged').val();
+    
+    
+     function getVal(sel) {
+       selectedValue = sel.value;
+         
+         if(selectedValue == "no") {
+             $('.product-package-size-container').addClass('noshow');
+             $('.product-num-package-container').addClass('noshow');
+             $('.product-total-amount-container').removeClass('noshow');
+             $('.product-price-container').removeClass('noshow');
+             
+         } else if (selectedValue == "yes"){
+             $('.product-package-size-container').removeClass('noshow');
+             $('.product-num-package-container').removeClass('noshow');
+             $('.product-total-amount-container').addClass('noshow');
+             $('.product-price-container').removeClass('noshow');
+
+             
+         } else {
+             $('.product-package-size-container').addClass('noshow');
+             $('.product-num-package-container').addClass('noshow');
+             $('.product-total-amount-container').addClass('noshow');
+             $('.product-price-container').addClass('noshow');
+
+         }
+    }
+    
+    console.log(selectedValue);
+
+    
 </script>
 </body>
 </html>

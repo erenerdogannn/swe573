@@ -15,7 +15,7 @@ public class WorkSlot {
 
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     private String timeStart;
     private String job;

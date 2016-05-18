@@ -83,10 +83,10 @@
                                 <img src="/assets/images/product_img/hardal.jpg" class="product-detail-img">
                         </div>
                         <div class="col-md-6 col-xs-12 product-detail-container">
-                            <p class="product-detail-name">Hardal</p>
-                            <p class="product-detail-price-info"><span class="product-detail-price">15</span> TL / <span class="product-detail-measurement">500gr</span></p>
-                            <p class="producer-info">Üretici: <span>Polivor Çiftliği</span></p>
-                            <p class="producer-info">Bölge: <span>Tekirdağ - Şarköy</span></p>
+                            <p id="product-detail-name" class="product-detail-name">Hardal</p>
+                            <p id="product-detail-price-info" class="product-detail-price-info"><span class="product-detail-price">15</span> TL / <span class="product-detail-measurement">500gr</span></p>
+                            <p id="product-detail-producer" class="producer-info">Üretici: <span>Polivor Çiftliği</span></p>
+                            <p id="product-detail-region" class="producer-info">Bölge: <span>Tekirdağ - Şarköy</span></p>
                         </div>
                     </div>
                     <div class="row">
@@ -100,7 +100,6 @@
                             <p>Mangalın vazgeçilmezi</p>
                             <h6>Ahmet</h6>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -129,70 +128,11 @@
     </div>
 </footer>
 
-<!--  Modal 
-<div class="modal fade" id="contact-modal" role="dialog" aria-labelledby="trackersModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="trackersModalLabel">Yorum Yaz</h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal-message-holder">
-                    <span class="form-error"></span>
-                </div>
-                <div class="modal-form-holder" style="padding-bottom: 0;">
-                    <form class="modal-form-group" id="contact-form" method="POST"
-                          onsubmit="return validateSubmitContact();">
-                        <div class="modal-form-item">
-                            <label class="form-label" for="contact-name">Name
-                            </label>
-                            <input class="form-text" id="contact-name" name="name" type="text" required
-                                   autofocus>
-                        </div>
-                        <div class="modal-form-item">
-                            <label class="form-label" for="contact-mail">Email
-                            </label>
-                            <input class="form-text" id="contact-mail" name="mail" type="text" required
-                                   autofocus>
-                        </div>
-                        <div class="modal-form-item">
-                            <label class="form-label" for="contact-subject">Subject*
-                            </label>
-                            <input class="form-text" id="contact-subject" name="subject" type="text" required
-                                   autofocus>
-                        </div>
-                        <div class="modal-form-item">
-                            <label class="form-label" for="contact-message">Message
-                            </label>
-                            <textarea class="" id="contact-message" name="message" required
-                                      autofocus></textarea>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="#contact-form-submit-button" onclick="$('#contact-form').submit();"
-                        class="button button-md button-blue center">Submit
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-End Modal -->
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/assets/javascript/bootstrap.min.js"></script>
-
 <script src="/assets/javascript/moment.min.js"></script>
 <script src="/assets/javascript/daterangepicker.min.js"></script>
 <script src="/assets/javascript/main.js"></script>
-
     
 <script>
     //Remove Page Load Transition Effect. At the Beggining stop CSS Transactions

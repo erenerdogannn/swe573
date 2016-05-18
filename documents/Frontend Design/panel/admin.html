@@ -29,8 +29,8 @@
 </head>
 
 <body class="preload body-panel">
-
 <div class="panel-wrapper">
+
 
     <!-- SIDEBAR -->
     <div class="panel-sidebar-hide-wrapper">
@@ -44,12 +44,6 @@
                     </a>
                 </li>
                 <li class="panel-sidebar-item">
-                    <a class="current" href="/panel/forum.html">
-                        <figure id=""></figure>
-                        <h5>FORUM</h5>
-                    </a>
-                </li>
-                <li class="panel-sidebar-item">
                     <a href="/panel/volunteer.html">
                         <figure id=""></figure>
                         <h5>GÖNÜLLÜ OL</h5>
@@ -57,7 +51,7 @@
                 </li>
                 <li class="panel-sidebar-item dropdown"
                     class="collapsed active">
-                    <a  href="/panel/add-product-producer.html">
+                    <a href="/panel/add-product-producer.html">
                         <figure id=""></figure>
                         <h5>ÜRÜN/ÜRETİCİ EKLE</h5>
                         <span class="arrow"></span>
@@ -100,7 +94,7 @@
                     </a>
                 </li>
                 <li class="panel-sidebar-item">
-                    <a href="/panel/admin.html">
+                    <a class="current" href="/panel/admin.html">
                         <figure></figure>
                         <h5>ADMIN</h5>
                     </a>
@@ -137,7 +131,7 @@
             </div>
 
             <div class="user-logout-holder">
-                <a href="/main/index.html"
+                <a id="sign-out-btn"
                    class="button button-verythin a button-red  button-xs right user-logout-button">Çıkış Yap</a>
             </div>
 
@@ -145,7 +139,7 @@
         </ul>
     </div>
     <!-- END OF SIDEBAR -->
-
+    
     <div class="panel-content-wrapper without-header">
         <div class="panel-content-holder without-header">
 
@@ -170,131 +164,108 @@
 
             END OF ALERTS -->
             
-            <div class="panel-content-widget xlg border-bottom ">
+            <div class="panel-content-widget xlg border-bottom">
                 <ul class="panel-content-heading-holder">
-                    <li class="panel-content-heading-item"><a href="#" class="current">
-                            Forum</a></li>
+                    <li class="panel-content-heading-item"><a href="#" class="current">Admin Panel</a></li>
                 </ul>
             </div>
+            <div class="panel-content-widget xlg" style="padding-top: 40px;">
+                <div class="panel-table-holder">
+                   <!-- <button class="button button-md button-blue" id="add-domain" data-toggle="modal"
+                            data-target="#add-domain-modal" style="display: block;">Kullanıcı Ekle
+                    </button> -->
+                    <table class="table table-project" id="project-table">
+                        <thead>
+                        <tr>
+                            <th class="" width="260">
+                                Ad Soyad
+                            </th>
+                            <th class="center-txt">
+                                Email
+                                <span></span>
+                            </th>
+                            <th class="center-txt">
+                                Şifre
+                                <span></span>
+                            </th>
+                            <th class="center-txt">
+                                Rolü
+                                <span></span>
+                            </th>
+                            <th>
 
-                <div class="panel-content-widget xlg" style="padding-top: 40px;">
-                    <div class="panel-table-holder">
-                        <button class="button button-md button-blue" id="add-project" data-toggle="modal"
-                                data-target="#add-project-modal">Konu Yarat
-                        </button>
-                        <table id="campaigns-table" class="table table-project">
-                            <thead>
-                            <tr>
-                                <th class="" width="300">
-                                    Konu Adı
-                                </th>
-                                <th class="" width="300">
-                                    Yaratan Kişi
-                                </th>
-                                <th class="">
-                                    Son Yazı Tarihi
-                                    <span></span>
-                                </th>
+                            </th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="">
+                                <td class="domain-name-holder">
+                                    <span>
+                                    Eren Erdogan
+                                    </span>
+                                </td>
+                                <td class="domain-situation-holder center">
+                                    <span>eren@eren.com</span>
+                                </td>
+                                <td class="domain-situation-holder center">
+                                    <span>123456</span>
+                                </td>
+
+                                <td class="domain-situation-holder center">
+                                    <span>Üye</span>
+                                </td>
+                                <td>
+                                    <a class="delete-domain" href="#"><i class="fa fa-trash-o"></i></a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class="project-name-holder">
-                                        <a href="forum-detail.html"><span class="project-name">Hatay Gezisi</span></a>
-                                    </td>
-                                    <td class="project-name-holder">
-                                        Eren Erdoğan
-                                    </td>
-                                    <td class="project-stat-holder">
-                                        16 Mart 2015
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-            
-                <!-- EMPTY MESSAGE 
-                <div class="panel-content-widget xlg">
-                    <div class="start-project-holder">
-                        <h3 class="main-message">Hiç bir ürününüz yok lütfen ürün ekleyin.</h3>
-                        <button class="button button-md button-green center" data-toggle="modal"
-                                data-target="#add-project-modal">START HERE
-                        </button>
-                    </div>
-                </div>
-                 EMPTY MESSAGE END -->
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Add Campaign Modal -->
-<div class="modal fade" id="add-project-modal" role="dialog" aria-labelledby="trackersModalLabel"
+<!-- Add Project Modal -->
+<div class="modal fade" id="add-domain-modal" role="dialog" aria-labelledby="trackersModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                             class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="trackersModalLabel">Konu Yarat</h4>
+                <h4 class="modal-title" id="trackersModalLabel">Add Domain</h4>
             </div>
             <div class="modal-body">
                 <div class="modal-message-holder">
                     <span class="form-error"></span>
                 </div>
                 <div class="modal-form-holder">
-                    <form class="modal-form-group" id="project-add-form" method="POST"
-                          onsubmit="return validateAddProject();">
+                    <form class="modal-form-group" id="add-domain-form" method="POST" action=""
+                          onsubmit="return validateAddDomain();">
                         <div class="modal-form-item">
-                            <label class="form-label" for="project-name">Konu Adı
+                            <label class="form-label" for="domain-name">Domain Name
                             </label>
-                            <input class="form-text" id="project-name" name="name" type="text" required
+                            <input class="form-text" id="domain-name" name="domain" type="text" required
                                    autofocus>
-                            <span class="form-sub-info">min. 4 - maks. 32 karakter</span>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="$('#project-add-form').submit();"
-                        class="button button-md button-blue center">Add Placement
+                <button type="button" onclick="$('#add-domain-form').submit();"
+                        class="button button-md button-blue center">Add Domain
                 </button>
             </div>
+
         </div>
     </div>
 </div>
 <!-- End Modal -->
-
-<!-- Delete Campaign Modal -->
-<div class="modal fade" id="delete-project-modal" role="dialog" aria-labelledby="trackersModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="trackersModalLabel">Delete Placement</h4>
-            </div>
-            <div class="modal-body">
-                
-                <div class="modal-message-holder">
-                    <span class="form-error"></span>
-                </div>
-                <div class="modal-text-holder">
-                    <p class="modal-text center-txt" style="font-size: 19px; margin-bottom: 0px;">
-                         Are you sure to delete placement ?</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a id="campaign_delete_url" href=""
-                   class="button a button-md button-red center">Delete Placement
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
-
 
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
 <script src="/assets/javascript/bootstrap.min.js"></script>

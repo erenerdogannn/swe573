@@ -16,25 +16,28 @@ public class Producer {
 
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     @Column(columnDefinition = "VARCHAR(2048)")
     private String name;
     private String region;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "TEXT")
     private String info;
 
+    @Column(columnDefinition = "VARCHAR(2048)")
+    private String photoURL;
+
     @OneToMany(mappedBy = "producer")
+    @JsonIgnore
     private List<Product> products;
 
     @OneToMany(mappedBy = "producer")
+    @JsonIgnore
     private List<Announcement> announcements;
 
     @OneToMany(mappedBy = "producer")
+    @JsonIgnore
     private List<Event> events;
 
-    /*
-    private String photoURL;
-    */
 }

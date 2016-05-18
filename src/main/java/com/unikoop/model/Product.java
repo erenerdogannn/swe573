@@ -16,37 +16,40 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     @Column(columnDefinition = "VARCHAR(2048)")
     private String name;
-    private int price;
     private String region;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "TEXT")
     private String info;
 
-    private int amount;
     private String measurement;
-    private boolean isPackaged;
-    private boolean packageSize;
+    private String isPackaged;
+
+    private int packageSize;
     private int numOfPackage;
-    private float unitPrice;
+
+    private int totalAmount;
+    private float price;
+
+    @Column(columnDefinition = "VARCHAR(2048)")
+    private String photoURL;
+
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Announcement> announcements;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Event> events;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Sale> sales;
 
-    /*
-    private String photoURL;
-    */
-
     @ManyToOne
-    @JsonIgnore
     private Producer producer;
 }

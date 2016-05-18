@@ -77,7 +77,7 @@ function validateSignInForm() {
     var atposition = email.indexOf("@");
     var dotposition = email.lastIndexOf(".");
     
-    if (document.cookie.length > 0) {
+    if (document.cookie.length > 0 && document.cookie.indexOf('ail')>0) {
     var cookieemail = document.cookie.split(';')[0].split('=')[1];
     var cookiepassword = document.cookie.split(';')[1].split('=')[1];
     }
@@ -85,7 +85,7 @@ function validateSignInForm() {
     if (email==null || email=="") {
 
         $('#signin-form .form-error').parent().css('display', 'block');
-        $('#signin-form .form-error').html('Mail must be filled out');
+        $('#signin-form .form-error').html('Mail alanı doldurulmalıdır');
         $('#signin-email').addClass('error');
         return false;
 
@@ -94,7 +94,7 @@ function validateSignInForm() {
     if (password==null || password=="") {
 
         $('#signin-form .form-error').parent().css('display', 'block');
-        $('#signin-form .form-error').html('Password must be filled out');
+        $('#signin-form .form-error').html('Şifre alanı boş bırakılamaz');
         $('#signin-password').addClass('error');
         return false;
 
@@ -103,7 +103,7 @@ function validateSignInForm() {
     if (password.length < 6) {
 
         $('#signin-form .form-error').parent().css('display', 'block');
-        $('#signin-form .form-error').html('Password should be min. 6 character');
+        $('#signin-form .form-error').html('Şifre min. 6 karakter olabilir');
         $('#signin-password').addClass('error');
         return false;
 
@@ -112,7 +112,7 @@ function validateSignInForm() {
     if (password.length > 32) {
 
         $('#signin-form .form-error').parent().css('display', 'block');
-        $('#signin-form .form-error').html('Password should be max. 32 character');
+        $('#signin-form .form-error').html('Şifre max. 32 karakter olabilir');
         $('#signin-password').addClass('error');
         return false;
 
@@ -120,16 +120,16 @@ function validateSignInForm() {
 
     if (atposition< 1 || dotposition<atposition+2 || dotposition+2>=email.length) {
         $('#signin-form .form-error').parent().css('display', 'block');
-        $('#signin-form .form-error').html('Invalid Mail adress');
+        $('#signin-form .form-error').html('Geçersiz mail adresi');
         $('#signin-email').addClass('error');
         return false;
     };
     
     if (email == "admin@admin.com" && password == "123456")  {
-        window.location.pathname = "/panel/forum.html";
+        window.location.pathname = "/panel/volunteer.html";
         return false;
     } else if (email == cookieemail && password == cookiepassword ){
-        window.location.pathname = "/panel/forum.html";
+        window.location.pathname = "/panel/volunteer.html";
         return false;
     } else {
         $('#signin-form .form-error').parent().css('display', 'block');
@@ -231,7 +231,7 @@ function validateSignUpForm() {
     document.cookie="mail=" + email + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
     document.cookie="password=" + password + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
     
-    window.location.pathname = "/panel/forum.html";
+    window.location.pathname = "/panel/volunteer.html";
     return false;
 }
 
@@ -308,6 +308,11 @@ function validateNewPass() {
     }
 }
 
+$('#sign-out-btn').on('click', function() {
+    
+    window.location.pathname = "/main/index.html";
+    
+});
 
 //Sign Up Form Key Up Events For Validation of password length
 //---------------------------------------------

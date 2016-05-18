@@ -17,28 +17,22 @@ public class Event {
 
     @Id
     @GeneratedValue
-    private int id;
+    private short id;
 
     private String name;
     private String location;
 
-    @Column
-    @Type(type="timestamp")
     private Date eventDate;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "TEXT")
     private String info;
 
     @ManyToOne
-    @JsonIgnore
     private Product product;
 
     @ManyToOne
-    @JsonIgnore
     private Producer producer;
 
-    /*
-    private String PhotoURL;
-    */
+
 
 }
