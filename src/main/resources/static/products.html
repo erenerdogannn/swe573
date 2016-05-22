@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="main-content-container" >
-                    <h5>Tüm Ürünler</h5>
+                    <h5 id="category-name"></h5>
                     <div class="row" id="product-list">
                     </div>
                 </div>
@@ -141,6 +141,40 @@
             var categoryId = window.location.href.split('category=')[1];
             console.log(categoryId);
             
+            if(categoryId == "1") {
+                $('#category-name').append(
+                    '<h5> Taze Meyveler</h5>'
+                );
+            } else if(categoryId == "2") {
+                $('#category-name').append(
+                    '<h5> Taze Sebzeler</h5>'
+                );
+            } else if(categoryId == "3") {
+                $('#category-name').append(
+                    '<h5> Yeşillikler</h5>'
+                );
+            } else if(categoryId == "4") {
+                $('#category-name').append(
+                    '<h5> Kahvaltılık Ürünler</h5>'
+                );
+            } else if(categoryId == "5") {
+                $('#category-name').append(
+                    '<h5> Zeytin ve Zeytinyağı</h5>'
+                );
+            } else if(categoryId == "6") {
+                $('#category-name').append(
+                    '<h5>Salça ve Soslar</h5>'
+                );
+            } else if(categoryId == "7") {
+                $('#category-name').append(
+                    '<h5> Kuru Gıdalar</h5>'
+                );
+            } else if(categoryId == "8") {
+                $('#category-name').append(
+                    '<h5> Et Tavuk ve Balık</h5>'
+                );
+            }
+
             for (var i = products.length - 1; i > -1 ; i-- ) {
                 
                 var tempPhotoURL;
@@ -175,6 +209,9 @@
         //if there is no category parameter show all products    
         } else {
             
+            $('#category-name').append(
+                '<h5> Tüm Kategoriler</h5>'
+            );
             
             for (var i = products.length - 1; i > -1 ; i-- ) {
 

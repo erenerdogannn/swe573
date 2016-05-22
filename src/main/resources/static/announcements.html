@@ -102,46 +102,56 @@
         $("body").removeClass("preload");
     });
     
+    
     $(document).ready(function(){
+        
+        jQuery.ajaxSetup({async:false});
+        
+        var anns;
         
         $.getJSON( urlRoot + "/announcements", 
             function (data) {
-                $.each( data, function( key, val ) {
-                    
-                var tempProductAnn;
-                var tempProductAnnId;
-                var tempProducerAnn;
+                anns = data;
             
-                if (val.product == null) {
-                    tempProductAnn = " ";
-                    tempProductAnnId = "";
-                } else {
-                    tempProductAnn = val.product.name;
-                    tempProductAnnId = val.product.id;
-                }
-            
-                if (val.producer == null) {
-                    tempProducerAnn = " ";
-                } else {
-                    tempProducerAnn = val.producer.name;
-                }
-                    
-                    $('#ann-container').append( 
-                    "<div class='main-content-container'>" +
-                        "<h4>" + val.name + "</h4>" +
-                        "<br>" +
-                        "<p> <i class='fa fa-calendar' ></i>&nbsp;" + val.announcementDate + "</p>" +
-                        "<p>" + val.info + "</p>" +
-                        "<p>Ürün: <a href='productdetail.html?" + tempProductAnnId + "'>" + tempProductAnn + "</a></p>" +
-                        "<p>Üretici: <a href='producers.html'>" + tempProducerAnn + "</a></p>" +
-                        "<img class='ann-img' src='" + val.photoURL + "'>" +
-                    "</div>"
-                    );
-                });
-                
             }
         )
-    },'json');
+        
+        for(var i = anns.length-1; i > -1; i--) {
+
+            var tempProductAnn;
+            var tempProductAnnId;
+            var tempProducerAnn;
+
+            if (anns[i].product == null) {
+                tempProductAnn = " ";
+                tempProductAnnId = "";
+            } else {
+                tempProductAnn = anns[i].product.name;
+                tempProductAnnId = anns[i].product.id;
+            }
+
+            if (anns[i].producer == null) {
+                tempProducerAnn = " ";
+            } else {
+                tempProducerAnn = anns[i].producer.name;
+            }
+
+
+                $('#ann-container').append( 
+                "<div class='main-content-container'>" +
+                    "<h4>" + anns[i].name + "</h4>" +
+                    "<br>" +
+                    "<p> <i class='fa fa-calendar' ></i>&nbsp;" + anns[i].announcementDate + "</p>" +
+                    "<p>" + anns[i].info + "</p>" +
+                    "<p>Ürün: <a href='productdetail.html?" + tempProductAnnId + "'>" + tempProductAnn + "</a></p>" +
+                    "<p>Üretici: <a href='producers.html'>" + tempProducerAnn + "</a></p>" +
+                    "<img class='ann-img' src='" + anns[i].photoURL + "'>" +
+                "</div>"
+                );
+        };
+                
+        
+    });
 </script>
 
 </body>

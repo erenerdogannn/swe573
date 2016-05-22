@@ -115,7 +115,7 @@
                 <!-- <p class="user-name">Eren Erdoğan</p> -->
                 <a href="settings.html"
                    class="button button-verythin a button-blue  button-xs right user-account-button">
-                    Ayarlar</a>
+                    Profilim</a>
             </div>
 
             <div class="user-usage-holder">
@@ -314,7 +314,11 @@
                     function (data) {
 
                         $.each( data, function( key, val ) {
-                            $('#sales-table-items').append( "<tr><td class='project-name-holder'>" +val.saleTime + "</td><td class='project-name-holder''>" +val.product.id + "</td><td class='project-name-holder''>" +val.product.name + "</td><td class='project-name-holder'>" + val.amount + "</td><td class='project-name-holder'>"+ val.profit+"</td></tr>" );
+                            
+                            var date = new Date(val.saleTime);
+                            date = date.customFormat( "#YYYY#-#MM#-#DD#  #hhh#:#mm#");
+                            
+                            $('#sales-table-items').append( "<tr><td class='project-name-holder'>" + date + "</td><td class='project-name-holder''>" +val.product.id + "</td><td class='project-name-holder''>" +val.product.name + "</td><td class='project-name-holder'>" + val.amount + "</td><td class='project-name-holder'>"+ val.profit+"</td></tr>" );
 
                             grossSale = grossSale + val.profit;
                         });

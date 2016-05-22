@@ -105,45 +105,49 @@
     
     $(document).ready(function(){
         
+        jQuery.ajaxSetup({async:false});
+        
+        var events;
+        
         $.getJSON( urlRoot + "/events", 
             function (data) {
-                $.each( data, function( key, val ) {
-                    
-                var tempProduct;
-                var tempProductId;
-                var tempProducer;
-            
-                if (val.product == null) {
-                    tempProduct = " ";
-                    tempProductId = "";
-                } else {
-                    tempProduct = val.product.name;
-                    tempProductId = val.product.id;
-                }
-            
-                if (val.producer == null) {
-                    tempProducer = " ";
-                } else {
-                    tempProducer = val.producer.name;
-                }
-                    
-                    $('#event-container').append( 
-                    "<div class='main-content-container'>" +
-                        "<h4>" + val.name + "</h4>" +
-                        "<br>" +
-                        "<p><i class='fa fa-map-marker' ></i>&nbsp; &nbsp;" + val.location + "</p>" +
-                        "<p> <i class='fa fa-calendar' ></i>&nbsp;" + val.eventDate + "</p>" +
-                        "<p>" + val.info + "</p>" +
-                        "<p>Ürün: <a href='productdetail.html?" + tempProductId + "'>" + tempProduct + "</a></p>" +
-                        "<p>Üretici: <a href='producers.html'>" + tempProducer + "</a></p>" +
-                        "<img class='contact-img' src='/assets/images/map_contact.png'>" +
-                    "</div>"
-                    );
-                });
-                
+                events = data;
             }
         )
-    });
+            
+        for (var i = events.length -1; i > -1; i-- ) {
+
+            var tempProduct;
+            var tempProductId;
+            var tempProducer;
+
+            if (events[i].product == null) {
+                tempProduct = " ";
+                tempProductId = "";
+            } else {
+                tempProduct = events[i].product.name;
+                tempProductId = events[i].product.id;
+            }
+
+            if (events[i].producer == null) {
+                tempProducer = " ";
+            } else {
+                tempProducer = events[i].producer.name;
+            }
+
+                $('#event-container').append( 
+                "<div class='main-content-container'>" +
+                    "<h4>" + events[i].name + "</h4>" +
+                    "<br>" +
+                    "<p><i class='fa fa-map-marker' ></i>&nbsp; &nbsp;" + events[i].location + "</p>" +
+                    "<p> <i class='fa fa-calendar' ></i>&nbsp;" + events[i].eventDate + "</p>" +
+                    "<p>" + events[i].info + "</p>" +
+                    "<p>Ürün: <a href='productdetail.html?" + tempProductId + "'>" + tempProduct + "</a></p>" +
+                    "<p>Üretici: <a href='producers.html'>" + tempProducer + "</a></p>" +
+                "</div>"
+                );
+        };
+});
     
 </script>
 

@@ -116,7 +116,7 @@
                 <!-- <p class="user-name">Eren Erdoğan</p> -->
                 <a href="settings.html"
                    class="button button-verythin a button-blue  button-xs right user-account-button">
-                    Ayarlar</a>
+                    Profilim</a>
             </div>
 
             <div class="user-usage-holder">
@@ -319,6 +319,7 @@
             dataType:"json",
             success: function (html) {
                 alert('Değişiklik yapıldı.');
+                window.location.reload(true);
             },
              error: function (xhr, textStatus, thrownError) {
                 alert('Hata meydana geldi. Lütfen tekrar deneyiniz.');
@@ -350,6 +351,7 @@
             dataType:"json",
             success: function (html) {
                 alert('Değişiklik yapıldı.');
+                window.location.reload(true);
             },
              error: function (xhr, textStatus, thrownError) {
                 alert('Hata meydana geldi. Lütfen tekrar deneyiniz.');
@@ -375,9 +377,10 @@
             url: urlRoot + "/users/delete/" + userId,
             success: function (html) {
                 alert('Kullanıcı silindi.');
+                window.location.reload(true);
             },
              error: function (xhr, textStatus, thrownError) {
-                alert('Hata meydana geldi. Lütfen tekrar deneyiniz.');
+                alert('Hata meydana geldi, lütfen tekrar deneyiniz!');
 
             }
         });
