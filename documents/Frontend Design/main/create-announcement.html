@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Uni Koop</title>
+
+
+<!-- CSS -->
+<link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="/assets/stylesheets/jquery.dataTables.tableTools.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/stylesheets/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/stylesheets/main.css" type='text/css'>
+<link rel="stylesheet" href="/assets/stylesheets/select2.css" type='text/css'>
+<link rel="stylesheet" href="/assets/stylesheets/bootstrap-select.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/stylesheets/jquery.fileupload.css" type="text/css">
+<link rel="stylesheet" href="/assets/stylesheets/datatables.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/stylesheets/bootstrap-multiselect.css" type="text/css">
+
+</head>
+
+<body class="preload body-panel">
+
+<div class="panel-wrapper">
+
+    <!-- SIDEBAR -->
+    <div class="panel-sidebar-hide-wrapper">
+        <figure class="arrow-down"></figure>
+        <div class="panel-sidebar-wrapper">
+            <ul class="panel-sidebar-holder">
+                <li class="panel-sidebar-item first">
+                    <a href="/main/index.html">
+                        <figure class="logo">
+                        </figure>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/volunteer.html">
+                        <figure id=""></figure>
+                        <h5>GÖNÜLLÜ OL</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item dropdown"
+                    class="collapsed active">
+                    <a href="/main/add-product-producer.html">
+                        <figure id=""></figure>
+                        <h5>ÜRÜN/ÜRETİCİ EKLE</h5>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/pos.html">
+                        <figure id=""></figure>
+                        <h5>POS</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/sales-report.html">
+                        <figure id=""></figure>
+                        <h5>SATIŞ RAPORU</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/inventory-report.html">
+                        <figure id=""></figure>
+                        <h5>STOK RAPORU</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/create-workslot.html">
+                        <figure id=""></figure>
+                        <h5>İŞ YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/create-event.html">
+                        <figure id=""></figure>
+                        <h5>ETKİNLİK YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a class="current" href="/main/create-announcement.html">
+                        <figure id=""></figure>
+                        <h5>DUYURU YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a href="/main/admin.html">
+                        <figure></figure>
+                        <h5>ADMIN</h5>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-user-holder dropdown">
+        
+        <!-- Kullanıcı loginse current class'ı koy -->
+        <a class="sidebar-user-item"  href="#"data-toggle="dropdown">
+            <h5><i class="fa fa-cog"></i> Hesabım</h5>
+        </a>
+
+        <ul class="dropdown-menu not-slide not-close sidebar-user-dropdown">
+            <span class="arrow-icon"></span>
+
+            <div class="user-account-holder">
+                <p class="user-name">Eren Erdoğan</p>
+                <a href="/main/settings.html"
+                   class="button button-verythin a button-blue  button-xs right user-account-button">
+                    Ayarlar</a>
+            </div>
+
+            <div class="user-usage-holder">
+                <h5 class="user-usage-package">Admin</h5>
+
+                <!--
+                <p class="user-usage-project-number">Clicks</p>
+
+                <p class="user-usage-project-usage">Estimate</p>
+                -->
+            </div>
+
+            <div class="user-logout-holder">
+                <a id="sign-out-btn"
+                   class="button button-verythin a button-red  button-xs right user-logout-button">Çıkış Yap</a>
+            </div>
+
+
+        </ul>
+    </div>
+    <!-- END OF SIDEBAR -->
+
+    <div class="panel-content-wrapper without-header">
+        <div class="panel-content-holder without-header">
+
+            <!-- ALERTS
+
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Error!</strong>
+            </div>
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Success!</strong>
+            </div>
+
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Warning!</strong> 
+            </div>
+
+            END OF ALERTS -->
+            
+            <div class="panel-content-widget xlg border-bottom ">
+                <ul class="panel-content-heading-holder">
+                    <li class="panel-content-heading-item"><a href="#" class="current">
+                            Duyuru Yarat</a></li>
+                </ul>
+            </div>
+            <div class="panel-content-widget xlg"></div>
+
+            <div class="tab-content">
+                <div id="info-content" class="xlg">
+                    <form class="settings-info-holder" method="post">
+
+                        <div class="settings-form-item">
+                            <label class="form-label">Duyuru Adı </label>
+                            <input class="form-text" name="" value="">
+                        </div>
+                        <div class="settings-form-item">
+                            <label class="form-label">Duyuru Tarihi</label>
+                            <input class="form-text " name="" value="">
+                        </div>
+                        <div class="settings-form-item">
+                            <label class="form-label">Açıklama</label>
+                            <input class="form-text " name="" value="">
+                        </div>
+                        <div class="settings-form-item">
+                            <label class="form-label">Ürün</label>
+                            <input class="form-text " name="" value="">
+                        </div>
+                        <div class="settings-form-item">
+                            <label class="form-label">Üretici</label>
+                            <input class="form-text " name="" value="">
+                        </div>
+                        
+                        <div class="panel-content-widget xlg">
+                            <!-- EMPTY PLACE-->
+                        </div>
+                        <div class="panel-content-widget xlg">
+                            <button class="button button-blue button-md center">Duyuru Yarat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="panel-content-widget xlg"></div>
+            <div class="panel-content-widget xlg"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/assets/javascript/jquery-2.1.1.min.js"></script>
+<script src="/assets/javascript/bootstrap.min.js"></script>
+<script src="/assets/javascript/select2.min.js"></script>
+<script src="/assets/javascript/jquery.multiple.select.min.js"></script>
+<script src="/assets/javascript/moment-with-locales.min.js"></script>
+<script src="/assets/javascript/moment-timezone-with-data-2010-2020.min.js"></script>
+<script src="/assets/javascript/daterangepicker.min.js"></script>
+<script src="/assets/javascript/highcharts-custom.min.js"></script>
+<script src="/assets/javascript/map.js"></script>
+<script src="/assets/javascript/datatables.min.js"></script>
+<script src="/assets/javascript/jquery.dataTables.tableTools.min.js"></script>
+<script src="/assets/javascript/jspath.min.js"></script>
+<script src="/assets/javascript/jdata.js"></script>
+<script src="/assets/javascript/main.js"></script>
+<script src="/assets/javascript/pace.min.js"></script>
+
+<script src="/assets/javascript/mappings.js"></script>
+
+<script src="/assets/javascript/jquery.ui.widget.js"></script>
+<script src="/assets/javascript/bootstrap-select.min.js"></script>
+<script src="/assets/javascript/jquery.iframe-transport.js"></script>
+<script src="/assets/javascript/jquery.fileupload.js"></script>
+<script src="/assets/javascript/easytimer.min.js"></script>
+<script src="/assets/javascript/bootstrap-multiselect.js"></script>
+<script src="/assets/javascript/bootstrap-tagsinput.min.js"></script>
+
+<script>
+    // Array Remove - By John Resig (MIT Licensed)
+    Array.prototype.remove = function (from, to) {
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+    };
+</script>
+
+<script>
+    $('#delete-project-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        modal.find('#campaign_name').html(button.data('cname'))
+        modal.find('#campaign_delete_url').attr("href", button.data('url'))
+    })
+</script>
+</body>
+</html>

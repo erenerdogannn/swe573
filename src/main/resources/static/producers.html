@@ -13,7 +13,7 @@
     <link href="/assets/stylesheets/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/stylesheets/main.css" type='text/css'>
 </head>
-<body class="preload" style="background-color: #f8f9fa;">
+<body class="preload">
 
 <!-- Main Header -->
 <header class="header-wrapper" id="index-header">
@@ -36,47 +36,40 @@
                     <li class="navbar-item"><a href="contact.html"> İletişim </a></li>
                 </div>
 
-                <!-- if user is signed in -->
+                    <!-- if user is not signed in -->
                     <div class="button-holder">
-                        <a class="sign-button " id="signup-button" href="signup.html">Üye Ol</a>
+                        <a class="sign-button isNotSignedBtn" id="signup-button" href="signup.html">Üye Ol</a>
                     </div>
                     <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="signin.html">Giriş Yap</a>
-                    </div> -->
-                <!-- if user is not signed in 
+                        <a class="sign-button isNotSignedBtn" id="signin-button" href="signin.html">Giriş Yap</a>
+                    </div>
 
+                    <!-- if user is signed in -->
                     <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="/main/volunteer.html">PANEL</a>
+                        <a class="sign-button isSignedBtn" id="sign-out-btn" href="index.html">Sign Out</a>
                     </div>
-                  end if -->
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" href="volunteer.html">PANEL</a>
+                    </div>
             </ul>
         </nav>
     </div>
 </header>
-    
-<section id="faq">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                <h2>Duyurular</h2>
-            </div>
-        </div>
+
+<section class="index-content-wrapper">
+    <div class="index-content-holder container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="main-content-container">
-                    <h4>Salihli Asmaları</h4>
-                    <br>
-                    <p> <i class="fa fa-calendar" ></i>&nbsp; 16 Mart 2016 17:00</p>
-                    <p>Salihli, Manisa'nın bağlarıyla meşhur bir ilçesidir. Tam olarak 25 çeşit üzümün bulunduğu bölgenin asma yaprağını mutlaka tavsiye ediyoruz. Lezetli zeytinyağlı sarmalar yapabilirsiniz. Salihli Koop'un asma yaprakları satışı kooperatifimizde yapılmaktadır</p>
-                    <p>Ürün: <a>Ürün İsmi</a></p>
-                    <p>Üretici: <a>Üretici İsmi</a></p>
-                    <img class="contact-img" src="/assets/images/map_contact.png">
+                <div class="main-content-container" >
+                    <h4>Üreticiler</h4>
+                    <div class="row"id="producer-list">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-
+</section>    
+    
 <footer class="footer-wrapper" id="index-footer">
     <div class="footer-holder container-fluid">
         <div class="row">
@@ -97,8 +90,12 @@
     </div>
 </footer>
 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/assets/javascript/bootstrap.min.js"></script>
+
 <script src="/assets/javascript/moment.min.js"></script>
 <script src="/assets/javascript/daterangepicker.min.js"></script>
 <script src="/assets/javascript/main.js"></script>
@@ -109,6 +106,38 @@
     $(window).load(function () {
         $("body").removeClass("preload");
     });
+    
+    $(document).ready(function(){
+        
+        $.getJSON( urlRoot + "/producers", 
+            function (data) {
+                $.each( data, function( key, val ) {
+                    
+                    var tempPhotoURL;
+                    
+                    if (val.photoURL == "" || val.photoURL == null) {
+                        tempPhotoURL = "/assets/images/noimg.png";    
+                    } else {
+                        tempPhotoURL = val.photoURL;
+                    }
+                    
+                    $('#producer-list').append( 
+                            "<div class='producer-container col-md-3 col-xs-12' style='height: 300px;'>" +
+                            "<img src='" + tempPhotoURL + "' class='producer-img'>" +
+                            "<p class='producer-name'>" + val.name + "</p>" +
+                            "<p><i class='fa fa-map-marker'>&nbsp;</i><span>" + val.region + "</span></p>" +
+                            "<p style='font-size: 12px;'>" + val.info + "</p>" +
+                            "</div>"
+                    );
+                });
+                
+            }
+        )
+    });
+    
+    
+    
+
 </script>
 
 </body>

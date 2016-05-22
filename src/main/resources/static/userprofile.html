@@ -13,7 +13,7 @@
     <link href="/assets/stylesheets/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/stylesheets/main.css" type='text/css'>
 </head>
-<body class="preload" style="background-color: #f8f9fa;">
+<body class="preload">
 
 <!-- Main Header -->
 <header class="header-wrapper" id="index-header">
@@ -36,47 +36,38 @@
                     <li class="navbar-item"><a href="contact.html"> İletişim </a></li>
                 </div>
 
-                <!-- if user is signed in -->
+                    <!-- if user is not signed in -->
                     <div class="button-holder">
-                        <a class="sign-button " id="signup-button" href="signup.html">Üye Ol</a>
+                        <a class="sign-button isNotSignedBtn" id="signup-button" href="signup.html">Üye Ol</a>
                     </div>
                     <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="signin.html">Giriş Yap</a>
-                    </div> -->
-                <!-- if user is not signed in 
+                        <a class="sign-button isNotSignedBtn" id="signin-button" href="signin.html">Giriş Yap</a>
+                    </div>
 
+                    <!-- if user is signed in -->
                     <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="/main/volunteer.html">PANEL</a>
+                        <a class="sign-button isSignedBtn" id="sign-out-btn" href="index.html">Sign Out</a>
                     </div>
-                  end if -->
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" href="volunteer.html">PANEL</a>
+                    </div>
             </ul>
         </nav>
     </div>
 </header>
-    
-<section id="faq">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                <h2>Duyurular</h2>
-            </div>
-        </div>
+
+<section class="index-content-wrapper">
+    <div class="index-content-holder container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="main-content-container">
-                    <h4>Salihli Asmaları</h4>
-                    <br>
-                    <p> <i class="fa fa-calendar" ></i>&nbsp; 16 Mart 2016 17:00</p>
-                    <p>Salihli, Manisa'nın bağlarıyla meşhur bir ilçesidir. Tam olarak 25 çeşit üzümün bulunduğu bölgenin asma yaprağını mutlaka tavsiye ediyoruz. Lezetli zeytinyağlı sarmalar yapabilirsiniz. Salihli Koop'un asma yaprakları satışı kooperatifimizde yapılmaktadır</p>
-                    <p>Ürün: <a>Ürün İsmi</a></p>
-                    <p>Üretici: <a>Üretici İsmi</a></p>
-                    <img class="contact-img" src="/assets/images/map_contact.png">
+                <div class="main-content-container" id="profile-container" >       
+
                 </div>
             </div>
         </div>
     </div>
-</section>
-
+</section>    
+    
 <footer class="footer-wrapper" id="index-footer">
     <div class="footer-holder container-fluid">
         <div class="row">
@@ -97,8 +88,12 @@
     </div>
 </footer>
 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/assets/javascript/jquery-2.1.1.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/assets/javascript/bootstrap.min.js"></script>
+
 <script src="/assets/javascript/moment.min.js"></script>
 <script src="/assets/javascript/daterangepicker.min.js"></script>
 <script src="/assets/javascript/main.js"></script>
@@ -109,6 +104,65 @@
     $(window).load(function () {
         $("body").removeClass("preload");
     });
+    
+    $(document).ready(function(){
+        
+        jQuery.ajaxSetup({async:false});
+        
+        var userId = window.location.href.split("?")[1];
+        
+        $.getJSON( urlRoot + "/users/" + userId, 
+            function (data) {
+                    
+                var tempPhotoURL;
+                var tempJob;
+                var tempAge;
+                var tempUserType;
+            
+                if (data.photoURL == "" || data.photoURL == null) {
+                    tempPhotoURL = "/assets/images/noimg.png";    
+                } else {
+                    tempPhotoURL = data.photoURL;
+                }
+            
+                if (data.job == "" || data.job == null) {
+                    tempJob = "";    
+                } else {
+                    tempJob = data.job;
+                }
+            
+                if (data.age == "" || data.age == null) {
+                    tempAge = "";    
+                } else {
+                    tempAge = data.age;
+                }
+            
+                if (data.userType == "volunteer") {
+                    tempUserType = "Gönüllü";    
+                } else if (data.userType == "member" ){
+                    tempUserType = "Üye";
+                } else {
+                    tempUserType = "";
+                }
+                
+                $('#profile-container').append( 
+                    '<div class="row" style="padding-top: 30px;">' +
+                        '<img class="profile-element-pic" src="' + tempPhotoURL + '" style="width:200px; height:200px;">' +
+                        '<p class="profile-element" id="user-name"><b>Ad Soyad:&nbsp;&nbsp;</b> ' + data.name +' </p>' +
+                        '<p class="profile-element" id="user-email"><b>Email:&nbsp;&nbsp;</b>' + data.email + '</p>' +
+                        '<p class="profile-element" id="user-job"><b>Meslek:&nbsp;&nbsp;</b>' + tempJob + '</p>' +
+                        '<p class="profile-element" id="user-age"><b>Yaş:&nbsp;&nbsp;</b>' + tempAge + '</p>' +
+                        '<p class="profile-element" id="user-usertype"><b>Rol:&nbsp;&nbsp;</b>' + tempUserType + '</p>' +
+                    '</div>'
+                );
+                
+            }
+        )
+    });
+    
+    
+    
+
 </script>
 
 </body>

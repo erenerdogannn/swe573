@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
+    <title>Uni Koop</title>
+
+
+
+    <!-- Bootstrap -->
+    <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/stylesheets/main.css" type='text/css'>
+</head>
+
+<body class="preload">
+<div class="sign-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="logo-holder ">
+                <a href="index.html"><img src="/assets/images/unikoop_logo.png" class="logo"></a>
+            </div>
+            <div class="sign-form-holder">
+                <form class="sign-form-group" role="signin" id="signin-form" 
+                      onsubmit="return validateSignInForm()">
+                    <div class="sign-heading-holder">
+                        <h2 class="form-heading">GİRİŞ YAP</h2>
+                    </div>
+                    <div class="sign-message-holder" style="" >
+                        <span class="form-error">error</span>
+                    </div>
+                    <div class="sign-message-holder"style="">
+                        <span class="form-success">success</span>
+                    </div>
+                    <div class="sign-form-item-holder">
+                        <div class="sign-form-item">
+                            <input type="email" name="" class="form-text" id="signin-email" placeholder="Mail Adresiniz"
+                                   autofocus>
+                        </div>
+                        <div class="sign-form-item">
+                            <input type="password" name="" class="form-text" id="signin-password"
+                                   placeholder="Şifre">
+                            <!-- <span class="form-sub-info clickable"><a href="">Şifremi Unuttum?</a></span> -->
+                        </div>
+                        <!-- <div class="sign-form-item thin">
+                            <input type="checkbox" name="keep_login" value="1" class="form-checkbox" checked> <span
+                                    class="checkbox-span">Keep me logged in</span>
+                        </div> -->
+                    </div>
+                    <div class="sign-button-holder">
+                        <button class="button button-blue button-md center" type="submit"> GİRİŞ YAP</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="sign-footer-holder">
+                <p>Hesabınız yok mu?<a href="signup.html"> Hesap oluştur </a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/assets/javascript/jquery-2.1.1.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/assets/javascript/bootstrap.min.js"></script>
+
+<!-- main.js -->
+<script src="/assets/javascript/main.js"></script>
+
+<!--Remove Page Load Transition Effect. At the Beggining stop CSS Transactions -->
+<script>
+    
+var userMails = [];
+var userPasswords = [];
+    
+    $(window).load(function () {
+        
+        jQuery.ajaxSetup({async:false});
+        
+        $("body").removeClass("preload");
+        
+                
+        $.getJSON( urlRoot + "/users", 
+            function (data) {
+            
+                $.each( data, function( key, val ) {
+                userMails[val.id - 1] = val.email;
+                userPasswords[val.id - 1] = val.password;
+                });
+                
+            }
+        )
+        
+        console.log(userMails);
+        console.log(userPasswords);
+    
+    });
+</script>
+
+</body>
+</html>

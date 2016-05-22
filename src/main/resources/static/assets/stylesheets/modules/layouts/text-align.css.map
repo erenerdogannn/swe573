@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW;EACT,UAAU,EAAE,KAAK;;AAGnB,WAAY;EACV,UAAU,EAAE,MAAM;;AAGpB,SAAU;EACR,UAAU,EAAE,IAAI",
+"sources": ["text-align.scss"],
+"names": [],
+"file": "text-align.css"
+}

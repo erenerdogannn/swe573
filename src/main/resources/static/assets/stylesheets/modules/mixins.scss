@@ -1,0 +1,54 @@
+@mixin transition($properties) {
+  -webkit-transition: $properties;
+  -moz-transition: $properties;
+  transition: $properties;
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin background-image($size, $position) {
+  background-position: $position;
+  background-repeat: no-repeat;
+  background-size: $size;
+}
+
+@mixin box-shadow($properties) {
+  -webkit-box-shadow: $properties;
+  -moz-box-shadow: $properties;
+  -ms-box-shadow: $properties;
+  box-shadow: $properties;
+}
+
+@mixin box-shadow-double($property1, $property2) {
+  -webkit-box-shadow: $property1, $property2;
+  -moz-box-shadow: $property1, $property2;
+  -ms-box-shadow: $property1, $property2;
+  box-shadow: $property1, $property2;
+}
+
+@mixin gradient($direction, $from, $to) {
+  background: $from;
+  background: -moz-linear-gradient($direction, $from, $to);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+  background: -webkit-linear-gradient($direction, $from, $to);
+  background: -o-linear-gradient($direction, $from, $to);
+}
+
+@mixin user-select($property) {
+  -webkit-touch-callout: $property;
+  -webkit-user-select: $property;
+  -khtml-user-select: $property;
+  -moz-user-select: $property;
+  -ms-user-select: $property;
+  user-select: $property;
+}
+
+@mixin font-style($ffamily: $fontstack, $fsize: 14px, $fweight : 400, $letspacing : 0px ) {
+  font-family: $ffamily;
+  font-size: $fsize;
+  font-weight: $fweight;
+  letter-spacing: $letspacing;
+}

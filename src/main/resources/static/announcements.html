@@ -35,20 +35,21 @@
                     <li class="navbar-item"><a href="faq.html"> S.S.S </a></li>
                     <li class="navbar-item"><a href="contact.html"> İletişim </a></li>
                 </div>
-
-                <!-- if user is signed in -->
+                    <!-- if user is not signed in -->
                     <div class="button-holder">
-                        <a class="sign-button " id="signup-button" href="signup.html">Üye Ol</a>
+                        <a class="sign-button isNotSignedBtn" id="signup-button" href="signup.html">Üye Ol</a>
                     </div>
                     <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="signin.html">Giriş Yap</a>
-                    </div> -->
-                <!-- if user is not signed in 
-
-                    <div class="button-holder">
-                        <a class="sign-button " id="signin-button" href="/main/volunteer.html">PANEL</a>
+                        <a class="sign-button isNotSignedBtn" id="signin-button" href="signin.html">Giriş Yap</a>
                     </div>
-                  end if -->
+
+                    <!-- if user is signed in -->
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" id="sign-out-btn" href="index.html">Sign Out</a>
+                    </div>
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" href="volunteer.html">PANEL</a>
+                    </div>
             </ul>
         </nav>
     </div>
@@ -62,16 +63,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="main-content-container">
-                    <h4>Salihli Asmaları</h4>
-                    <br>
-                    <p> <i class="fa fa-calendar" ></i>&nbsp; 16 Mart 2016 17:00</p>
-                    <p>Salihli, Manisa'nın bağlarıyla meşhur bir ilçesidir. Tam olarak 25 çeşit üzümün bulunduğu bölgenin asma yaprağını mutlaka tavsiye ediyoruz. Lezetli zeytinyağlı sarmalar yapabilirsiniz. Salihli Koop'un asma yaprakları satışı kooperatifimizde yapılmaktadır</p>
-                    <p>Ürün: <a>Ürün İsmi</a></p>
-                    <p>Üretici: <a>Üretici İsmi</a></p>
-                    <img class="contact-img" src="/assets/images/map_contact.png">
-                </div>
+            <div class="col-md-12 col-sm-12 col-xs-12" id="ann-container">
             </div>
         </div>
     </div>
@@ -109,6 +101,47 @@
     $(window).load(function () {
         $("body").removeClass("preload");
     });
+    
+    $(document).ready(function(){
+        
+        $.getJSON( urlRoot + "/announcements", 
+            function (data) {
+                $.each( data, function( key, val ) {
+                    
+                var tempProductAnn;
+                var tempProductAnnId;
+                var tempProducerAnn;
+            
+                if (val.product == null) {
+                    tempProductAnn = " ";
+                    tempProductAnnId = "";
+                } else {
+                    tempProductAnn = val.product.name;
+                    tempProductAnnId = val.product.id;
+                }
+            
+                if (val.producer == null) {
+                    tempProducerAnn = " ";
+                } else {
+                    tempProducerAnn = val.producer.name;
+                }
+                    
+                    $('#ann-container').append( 
+                    "<div class='main-content-container'>" +
+                        "<h4>" + val.name + "</h4>" +
+                        "<br>" +
+                        "<p> <i class='fa fa-calendar' ></i>&nbsp;" + val.announcementDate + "</p>" +
+                        "<p>" + val.info + "</p>" +
+                        "<p>Ürün: <a href='productdetail.html?" + tempProductAnnId + "'>" + tempProductAnn + "</a></p>" +
+                        "<p>Üretici: <a href='producers.html'>" + tempProducerAnn + "</a></p>" +
+                        "<img class='ann-img' src='" + val.photoURL + "'>" +
+                    "</div>"
+                    );
+                });
+                
+            }
+        )
+    },'json');
 </script>
 
 </body>

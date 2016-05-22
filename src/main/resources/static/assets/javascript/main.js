@@ -1,11 +1,38 @@
 /**
- * Created by Eren Erdogan on 06/11/14.
+ * Created by Eren Erdogan on 06/05/16.
  */
+
+var urlRoot = "http://localhost:8080";
+
+$(document).ready(function(){    
+    
+    if (document.cookie.indexOf('panelRol=') > -1) {
+            var isSigned = document.cookie.split('panelRol=')[1].split(';')[0];
+    }
+    
+    if (isSigned != "member" && isSigned != "volunteer" && isSigned != "admin") {
+        $('.isSignedBtn').hide();
+        
+    } else{
+        $('.isNotSignedBtn').hide();
+    }
+    
+    if(isSigned != "admin") {
+        $('.admin-sidebar').hide();
+        
+        if(isSigned != "volunteer") {
+            $('.volunteer-sidebar').hide();
+        } else {}
+        
+    } else {}
+})
+
 
 // Remove Page Load Transition Effect. At the Beggining stop CSS Transactions
 $(window).load(function() {
     $("body").removeClass("preload");
 });
+
 
 //Dropdown slider
 $(function(){
@@ -22,15 +49,6 @@ $(function(){
         e.stopPropagation();
     });
 });
-
-
-
-//--------------------------------------------//
-//-------------------- SIDEBAR JS ----------------//
-//--------------------------------------------//
-
-//-------------------- SIDEBAR END--------------//
-//--------------------------------------------//
 
 
 //--------------------------------------------//
@@ -71,15 +89,17 @@ $(function() {
 //Validate Sign In Form
 //---------------------------------------------
 function validateSignInForm() {
-
+    
+    jQuery.ajaxSetup({async:false});
+        
     var email = document.getElementById("signin-email").value;
     var password = document.getElementById("signin-password").value;
     var atposition = email.indexOf("@");
     var dotposition = email.lastIndexOf(".");
     
-    if (document.cookie.length > 0 && document.cookie.indexOf('ail')>0) {
-    var cookieemail = document.cookie.split(';')[0].split('=')[1];
-    var cookiepassword = document.cookie.split(';')[1].split('=')[1];
+    if (document.cookie.length > 0 && document.cookie.indexOf('mail')>-1) {
+        var cookieemail = document.cookie.split('mail=')[1].split(';')[0];
+        var cookiepassword = document.cookie.split('password=')[1].split(';')[0];
     }
 
     if (email==null || email=="") {
@@ -125,13 +145,47 @@ function validateSignInForm() {
         return false;
     };
     
-    if (email == "admin@admin.com" && password == "123456")  {
-        window.location.pathname = "/main/volunteer.html";
+    if (email == "admin@unikoop.com" && password == "123456")  {
+        
+        document.cookie="name=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="mail=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="password=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="role=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="panelRol=admin";
+        window.location.pathname = "volunteer.html";
         return false;
-    } else if (email == cookieemail && password == cookiepassword ){
-        window.location.pathname = "/main/volunteer.html";
+        
+    } else if (email == "gonullu@unikoop.com" && password == "123456"){
+        
+        document.cookie="name=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="mail=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="password=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="role=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+        document.cookie="panelRol=volunteer";
+        window.location.pathname = "volunteer.html";
         return false;
+        
+    } else if (userMails.indexOf(email) > -1 && userPasswords.indexOf(password)  > -1){
+        
+        var userId = userMails.indexOf(email) + 1;
+        
+        $.getJSON( urlRoot + "/users/" + userId, 
+            function (data) {
+                console.log(data);
+                document.cookie="uid=" + data.id + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                document.cookie="name=" + data.name + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                document.cookie="mail=" + data.email + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                document.cookie="password=" + data.password + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                document.cookie="role=" + data.userType + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                document.cookie="panelRol=" + data.userType + ";";                
+            }
+        )
+        
+        window.location.pathname = "volunteer.html";
+        return false;
+        
     } else {
+        
         $('#signin-form .form-error').parent().css('display', 'block');
         $('#signin-form .form-error').html('Kullanıcı kayıtlı bulunmamaktadır');
         return false;
@@ -142,6 +196,9 @@ function validateSignInForm() {
 //Validate Sign Up Form
 //---------------------------------------------
 function validateSignUpForm() {
+    
+    jQuery.ajaxSetup({async:false});
+    
     var name = document.getElementById("signup-name").value;
     var email = document.getElementById("signup-email").value;
     var password = document.getElementById("signup-password").value;
@@ -227,92 +284,34 @@ function validateSignUpForm() {
         return false;
     }
     
-   
-    document.cookie="mail=" + email + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
-    document.cookie="password=" + password + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    var userName = $('#signup-name').val();
+    var userEmail = $('#signup-email').val();
+    var userPassword = $('#signup-password').val();
     
-    window.location.pathname = "/main/volunteer.html";
+    
+    $.ajax({
+        headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+        },
+        type: "POST",
+        url: urlRoot + "/users/add",
+
+        data: JSON.stringify({
+            name: userName,
+            email: userEmail,
+            password: userPassword,
+            userType: "member"
+        }),
+        dataType:"json",
+        success: function (html) {
+            console.log('Kullanıcı başarıyla kaydedildi.');
+        }
+    });    
+    
+    window.location.pathname = "signin.html";
     return false;
 }
-
-//Send Recovery mail page
-function validateSendReset() {
-    var email = document.getElementById("forgot-password-email").value;
-    var atposition = email.indexOf("@");
-    var dotposition = email.lastIndexOf(".");
-
-
-    if (email==null || email=="") {
-        $('#forgot-password-form .form-error').parent().css('display', 'block');
-        $('#forgot-password-form .form-error').html('Mail must be filled out');
-        $('#signup-email').addClass('error');
-        return false;
-
-    };
-
-    if (atposition< 1 || dotposition<atposition+2 || dotposition+2>=email.length) {
-        $('#forgot-password-form .form-error').parent().css('display', 'block');
-        $('#forgot-password-form .form-error').html('Invalid Mail adress');
-        $('#signup-email').addClass('error');
-        return false;
-    };
-}
-
-//Forget Change Password
-function validateNewPass() {
-    var password = document.getElementById("forgot-change-password").value;
-    var confPassword = document.getElementById("forgot-change-confirm-password").value;
-
-    if (password==null || password=="") {
-
-        $('#forgot-change-form .form-error').parent().css('display', 'block');
-        $('#forgot-change-form .form-error').html('Password must be filled out');
-        $('#forgot-change-password').addClass('error');
-        return false;
-
-    };
-
-    if (confPassword==null || confPassword=="") {
-
-        $('#forgot-change-form .form-error').parent().css('display', 'block');
-        $('#forgot-change-form .form-error').html('Confirm Password must be filled out');
-        $('#forgot-change-password').addClass('error');
-        return false;
-
-    };
-
-    if (password.length < 6) {
-
-        $('#forgot-change-form .form-error').parent().css('display', 'block');
-        $('#forgot-change-form .form-error').html('Password should be min. 6 character');
-        $('#forgot-change-password').addClass('error');
-        return false;
-
-    };
-
-    if (password.length > 32) {
-
-        $('#forgot-change-form .form-error').parent().css('display', 'block');
-        $('#forgot-change-form .form-error').html('Password should be max. 32 character');
-        $('#forgot-change-password').addClass('error');
-        return false;
-
-    };
-
-
-    if (password !== confPassword) {
-        $('#forgot-change-form .form-error').parent().css('display', 'block');
-        $('#forgot-change-form .form-error').html("Password and Confirm Password doesn't match");
-        $('#forgot-change-confirm-password').addClass('error');
-        return false;
-    }
-}
-
-$('#sign-out-btn').on('click', function() {
-    
-    window.location.pathname = "/main/index.html";
-    
-});
 
 //Sign Up Form Key Up Events For Validation of password length
 //---------------------------------------------
@@ -332,25 +331,33 @@ $('#signup-password').keyup(function() {
 
 });
 
-//Forgot Change Password password length validation
-$('#forgot-change-password').keyup(function() {
 
-    var signUpPassword = document.getElementById('forgot-change-password').value;
+//Sign Out Button
+//---------------------------------------------
 
-    if (signUpPassword.length >= 6) {
 
-        $(this).siblings('.form-sub-info').addClass('success');
+$('#sign-out-btn').on('click', function() {
+    
+    document.cookie="uid=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie="name=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie="mail=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie="password=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie="role=; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+    document.cookie= "panelRol=;";
+    window.location.pathname = "index.html";
 
-    } else if (signUpPassword.length < 6) {
-
-        $(this).siblings('.form-sub-info').removeClass('success');
-
-    }
-
+    
 });
 
 //--------------SIGN FORMS JS END--------------//
 //--------------------------------------------//
+
+
+
+
+
+
+
 
 //--------------------------------------------//
 //------------------ LOADINGS ----------------//
@@ -661,19 +668,36 @@ $(".panel-wrapper").bind("DOMSubtreeModified", function() {
 
 
 
-/*
-//--------------------------------------------//
-//---------------- PANEL PLATFORM ------------//
-//--------------------------------------------//
 
-$(function() {
-    $('.panel-platform-dropdown').multipleSelect();
-});
-
-//------------ PANEL PLATFORM ENDS ------------//
+//--------------------------------------------//
+//--------- ADD PROD PRODUCER PLATFORM -------//
 //--------------------------------------------//
 
+    var selectedValue = $('#product-ispackaged').val();
+    
+    
+     function getVal(sel) {
+       selectedValue = sel.value;
+         
+         if(selectedValue == "no") {
+             $('.product-package-size-container').addClass('noshow');
+             $('.product-num-package-container').addClass('noshow');
+             $('.product-total-amount-container').removeClass('noshow');
+             
+         } else if (selectedValue == "yes"){
+             $('.product-package-size-container').removeClass('noshow');
+             $('.product-num-package-container').removeClass('noshow');
+             $('.product-total-amount-container').addClass('noshow');
 
+             
+         } else {
+             $('.product-package-size-container').addClass('noshow');
+             $('.product-num-package-container').addClass('noshow');
+             $('.product-total-amount-container').addClass('noshow');
 
+         }
+    }
 
-*/
+//------- ADD PROD PRODUCER PLATFORM END -----//
+//--------------------------------------------//
+
