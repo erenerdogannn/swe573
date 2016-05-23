@@ -25,7 +25,7 @@ public class Producer {
     @Column(columnDefinition = "TEXT")
     private String info;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String photoURL;
 
     @OneToMany(mappedBy = "producer")

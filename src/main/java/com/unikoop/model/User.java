@@ -1,5 +1,6 @@
 package com.unikoop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
@@ -26,12 +27,19 @@ public class User {
     private String email;
     private String password;
     private String job;
+    private String age;
     private String userType;
 
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String photoURL;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<WorkSlot> workSlots;
+
+    @OneToMany(mappedBy = "user", cascade=CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Comment> comments;
 
 
 }

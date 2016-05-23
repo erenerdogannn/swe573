@@ -25,6 +25,9 @@ public class SaleControllerTest {
     @Mock
     private ArrayList<Sale> saleList;
 
+    @Mock
+    private Sale sale;
+
     @InjectMocks
     SaleController saleController;
 
@@ -50,5 +53,15 @@ public class SaleControllerTest {
     public void getSales_shouldReturnWhatSaleRepositoryReturns() throws Exception {
         when(saleRepository.findAll()).thenReturn(saleList);
         assertEquals(saleController.getSales(), saleList);
+    }
+
+    /**
+     * @verifies invoke save method of sale repository
+     * @see SaleController#addSale(Sale)
+     */
+    @Test
+    public void addSale_shouldInvokeSaveMethodOfSaleRepository() throws Exception {
+        saleController.addSale(sale);
+        verify(saleRepository, times(1)).save(sale);
     }
 }

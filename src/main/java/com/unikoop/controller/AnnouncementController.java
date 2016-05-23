@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Eren on 15/05/16.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/announcements")
 public class AnnouncementController {
@@ -34,8 +35,11 @@ public class AnnouncementController {
         return announcementRepository.findOne(id);
     }
 
-
-    @RequestMapping(value= {"/add"}, method= RequestMethod.POST)
+    /**
+     * @param announcement to be saved
+     * @should invoke save method of announcement repository
+     */
+    @RequestMapping(value= {"/add"}, method= RequestMethod.POST, consumes="application/json", produces="application/json")
     public Announcement addAnnouncement(@RequestBody Announcement announcement) {
 
         return announcementRepository.save(announcement);

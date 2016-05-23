@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Eren on 15/05/16.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/events")
 public class EventController {
@@ -34,12 +35,13 @@ public class EventController {
         return eventRepository.findOne(id);
     }
 
-
-    @RequestMapping(value= {"/add"}, method= RequestMethod.POST)
+    /**
+     * @param event to be saved
+     * @should invoke save method of event repository
+     */
+    @RequestMapping(value= {"/add"}, method= RequestMethod.POST, consumes="application/json", produces="application/json")
     public Event addEvent(@RequestBody Event event) {
 
         return eventRepository.save(event);
     }
-
-    /*TODO: Get top 5 might be needed*/
 }

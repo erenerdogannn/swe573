@@ -26,6 +26,9 @@ public class ProductControllerTest {
     @Mock
     private ArrayList<Product> productList;
 
+    @Mock
+    private Product product;
+
     @InjectMocks
     ProductController productController;
 
@@ -52,5 +55,45 @@ public class ProductControllerTest {
     public void getProducts_shouldReturnWhatProductRepositoryReturns() throws Exception {
         when(productRepository.findAll()).thenReturn(productList);
         assertEquals(productController.getProducts(), productList);
+    }
+
+    /**
+     * @verifies invoke delete method of product repository with given id
+     * @see ProductController#deleteProduct(short)
+     */
+    @Test
+    public void deleteProduct_shouldInvokeDeleteMethodOfProductRepositoryWithGivenId() throws Exception {
+        productController.deleteProduct(anyShort());
+        verify(productRepository, times(1)).delete(anyShort());
+    }
+
+    /**
+     * @verifies invoke save method of product repository
+     * @see ProductController#addProduct(Product)
+     */
+    @Test
+    public void addProduct_shouldInvokeSaveMethodOfProductRepository() throws Exception {
+        productController.addProduct(product);
+        verify(productRepository, times(1)).save(product);
+    }
+
+    /**
+     * @verifies invoke findOne method of product repository with given id
+     * @see ProductController#getProduct(short)
+     */
+    @Test
+    public void getProduct_shouldInvokeFindOneMethodOfProductRepositoryWithGivenId() throws Exception {
+        productController.getProduct(anyShort());
+        verify(productRepository, times(1)).findOne(anyShort());
+    }
+
+    /**
+     * @verifies return what product repository returns
+     * @see ProductController#getProduct(short)
+     */
+    @Test
+    public void getProduct_shouldReturnWhatProductRepositoryReturns() throws Exception {
+        when(productController.getProduct(anyShort())).thenReturn(product);
+        assertEquals(productController.getProduct((short) 1), product);
     }
 }

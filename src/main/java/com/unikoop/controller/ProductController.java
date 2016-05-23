@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Eren on 15/05/16.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/products")
 public class ProductController {
@@ -30,21 +31,30 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value= "/{id}", method= RequestMethod.GET)
+    /**
+     * @param id of the product
+     * @return Product object with the given id
+     * @should invoke findOne method of product repository with given id
+     * @should return what product repository returns
+     */
+    @RequestMapping(value= {"/{id}"}, method= RequestMethod.GET)
     public Product getProduct(@PathVariable("id") short id) {
 
         return productRepository.findOne(id);
     }
 
-
-    @RequestMapping(value= {"/add"}, method= RequestMethod.POST)
+    /**
+     * @param product to be saved
+     * @should invoke save method of product repository
+     */
+    @RequestMapping(value= {"/add"}, method= RequestMethod.POST, consumes="application/json", produces="application/json")
     public Product addProduct(@RequestBody Product product) {
 
         return productRepository.save(product);
     }
 
-    @RequestMapping(value= {"/update/{id}"}, method= RequestMethod.PUT)
-    public void updateProduct(@PathVariable("id") short id, @RequestBody Product updatedProduct) {
+    @RequestMapping(value= {"/update/{id}"}, method= RequestMethod.PUT, consumes="application/json", produces="application/json")
+    public boolean updateProduct(@PathVariable("id") short id, @RequestBody Product updatedProduct) {
 
         Product existingProduct = productRepository.findOne(id);
 
@@ -66,10 +76,10 @@ public class ProductController {
         if (updatedProduct.getPackageSize() != 0)
             existingProduct.setPackageSize(updatedProduct.getPackageSize());
 
-        if (updatedProduct.getNumOfPackage() != 0)
+        if (updatedProduct.getNumOfPackage() > -1)
             existingProduct.setNumOfPackage(updatedProduct.getNumOfPackage());
 
-        if (updatedProduct.getTotalAmount() != 0)
+        if (updatedProduct.getTotalAmount() > -1)
             existingProduct.setTotalAmount(updatedProduct.getTotalAmount());
 
         if (updatedProduct.getPrice() != 0)
@@ -80,8 +90,14 @@ public class ProductController {
 
         productRepository.save(existingProduct);
 
+        return true;
+
     }
 
+    /**
+     * @param id of the product that will be deleted
+     * @should invoke delete method of product repository with given id
+     */
     @RequestMapping(value= "/delete/{id}", method= RequestMethod.DELETE)
     public void deleteProduct(@PathVariable("id") short id) {
 

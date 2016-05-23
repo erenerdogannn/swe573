@@ -22,7 +22,7 @@ public class Event {
     private String name;
     private String location;
 
-    private Date eventDate;
+    private String eventDate;
 
     @Column(columnDefinition = "TEXT")
     private String info;

@@ -26,6 +26,9 @@ public class ProducerControllerTest {
     @Mock
     private ArrayList<Producer> producerList;
 
+    @Mock
+    private Producer producer;
+
     @InjectMocks
     ProducerController producerController;
 
@@ -54,5 +57,45 @@ public class ProducerControllerTest {
     public void getProducers_shouldReturnWhatProducerRepositoryReturns() throws Exception {
         when(producerRepository.findAll()).thenReturn(producerList);
         assertEquals(producerController.getProducers(), producerList);
+    }
+
+    /**
+     * @verifies invoke delete method of producer repository with given id
+     * @see ProducerController#deleteProducer(short)
+     */
+    @Test
+    public void deleteProducer_shouldInvokeDeleteMethodOfProducerRepositoryWithGivenId() throws Exception {
+        producerController.deleteProducer(anyShort());
+        verify(producerRepository, times(1)).delete(anyShort());
+    }
+
+    /**
+     * @verifies invoke save method of producer repository
+     * @see ProducerController#addProducer(Producer)
+     */
+    @Test
+    public void addProducer_shouldInvokeSaveMethodOfProducerRepository() throws Exception {
+        producerController.addProducer(producer);
+        verify(producerRepository, times(1)).save(producer);
+    }
+
+    /**
+     * @verifies invoke findOne method of producer repository with given id
+     * @see ProducerController#getProducer(short)
+     */
+    @Test
+    public void getProducer_shouldInvokeFindOneMethodOfProducerRepositoryWithGivenId() throws Exception {
+        producerController.getProducer(anyShort());
+        verify(producerRepository, times(1)).findOne(anyShort());
+    }
+
+    /**
+     * @verifies return what producer repository returns
+     * @see ProducerController#getProducer(short)
+     */
+    @Test
+    public void getProducer_shouldReturnWhatProducerRepositoryReturns() throws Exception {
+        when(producerController.getProducer(anyShort())).thenReturn(producer);
+        assertEquals(producerController.getProducer((short) 1), producer);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Eren on 15/05/16.
  */
+@CrossOrigin
 @RestController
 @RequestMapping(value="/workslots")
 public class WorkSlotController {
@@ -36,14 +37,18 @@ public class WorkSlotController {
     }
 
 
-    @RequestMapping(value= {"/add"}, method= RequestMethod.POST)
+    /**
+     * @param workSlot to be saved
+     * @should invoke save method of workSlot repository
+     */
+    @RequestMapping(value= {"/add"}, method= RequestMethod.POST, consumes="application/json", produces="application/json")
     public WorkSlot addWorkSlot(@RequestBody WorkSlot workSlot) {
 
         return workSlotRepository.save(workSlot);
     }
 
     @RequestMapping(value= {"/update/{id}"}, method= RequestMethod.PUT)
-    public void updateWorkSlot(@PathVariable("id") short id, @RequestBody WorkSlot updatedWorkSlot) {
+    public boolean updateWorkSlot(@PathVariable("id") short id, @RequestBody WorkSlot updatedWorkSlot) {
 
         WorkSlot existingWorkSlot = workSlotRepository.findOne(id);
 
@@ -55,11 +60,12 @@ public class WorkSlotController {
 
         workSlotRepository.save(existingWorkSlot);
 
+        return true;
     }
 
 
     @RequestMapping(value= "/delete/{id}", method= RequestMethod.DELETE)
-    public void deleteUser(@PathVariable("id") short id) {
+    public void deleteWorkSlot(@PathVariable("id") short id) {
 
         workSlotRepository.delete(id);
     }

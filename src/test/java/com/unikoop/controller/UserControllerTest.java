@@ -54,4 +54,14 @@ public class UserControllerTest {
         assertEquals(userController.getUsers(), userList);
 
     }
+
+    /**
+     * @verifies invoke delete method of user repository with given id
+     * @see UserController#deleteUser(short)
+     */
+    @Test
+    public void deleteUser_shouldInvokeDeleteMethodOfUserRepositoryWithGivenId() throws Exception {
+        userController.deleteUser(anyShort());
+        verify(userRepository, times(1)).delete(anyShort());
+    }
 }

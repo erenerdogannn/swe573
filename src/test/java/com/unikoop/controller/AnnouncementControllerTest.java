@@ -25,6 +25,9 @@ public class AnnouncementControllerTest {
     @Mock
     private ArrayList<Announcement> announcementList;
 
+    @Mock
+    private Announcement announcement;
+
     @InjectMocks
     AnnouncementController announcementController;
 
@@ -53,5 +56,15 @@ public class AnnouncementControllerTest {
         when(announcementRepository.findAll()).thenReturn(announcementList);
         assertEquals(announcementController.getAnnouncements(), announcementList);
 
+    }
+
+    /**
+     * @verifies invoke save method of announcement repository
+     * @see AnnouncementController#addAnnouncement(Announcement)
+     */
+    @Test
+    public void addAnnouncement_shouldInvokeSaveMethodOfAnnouncementRepository() throws Exception {
+        announcementController.addAnnouncement(announcement);
+        verify(announcementRepository, times(1)).save(announcement);
     }
 }

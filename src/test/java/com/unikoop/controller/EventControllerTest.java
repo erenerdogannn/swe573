@@ -26,6 +26,9 @@ public class EventControllerTest {
     @Mock
     private ArrayList<Event> eventList;
 
+    @Mock
+    private Event event;
+
     @InjectMocks
     EventController eventController;
 
@@ -52,5 +55,15 @@ public class EventControllerTest {
     public void getEvents_shouldReturnWhatEventRepositoryReturns() throws Exception {
         when(eventRepository.findAll()).thenReturn(eventList);
         assertEquals(eventController.getEvents(), eventList);
+    }
+
+    /**
+     * @verifies invoke save method of event repository
+     * @see EventController#addEvent(Event)
+     */
+    @Test
+    public void addEvent_shouldInvokeSaveMethodOfEventRepository() throws Exception {
+        eventController.addEvent(event);
+        verify(eventRepository, times(1)).save(event);
     }
 }

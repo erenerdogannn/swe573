@@ -25,6 +25,9 @@ public class WorkSlotControllerTest {
     @Mock
     private ArrayList<WorkSlot> workSlotList;
 
+    @Mock
+    private WorkSlot workSlot;
+
     @InjectMocks
     WorkSlotController workSlotController;
 
@@ -52,5 +55,15 @@ public class WorkSlotControllerTest {
         when(workSlotRepository.findAll()).thenReturn(workSlotList);
         assertEquals(workSlotController.getWorkSlots(), workSlotList);
 
+    }
+
+    /**
+     * @verifies invoke save method of workSlot repository
+     * @see WorkSlotController#addWorkSlot(WorkSlot)
+     */
+    @Test
+    public void addWorkSlot_shouldInvokeSaveMethodOfWorkSlotRepository() throws Exception {
+        workSlotController.addWorkSlot(workSlot);
+        verify(workSlotRepository, times(1)).save(workSlot);
     }
 }

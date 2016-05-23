@@ -22,7 +22,8 @@ public class Sale {
     @Column(nullable = false)
     private Timestamp saleTime;
 
-    private int amount;
+    private float amount;
+    private float profit;
 
     @ManyToOne
     private Product product;

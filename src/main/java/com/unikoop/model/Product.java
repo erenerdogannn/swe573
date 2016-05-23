@@ -25,18 +25,23 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String info;
 
+    private String category;
+
     private String measurement;
     private String isPackaged;
 
-    private int packageSize;
+    private float packageSize;
     private int numOfPackage;
 
-    private int totalAmount;
+    private float totalAmount;
     private float price;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String photoURL;
 
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "product")
     @JsonIgnore

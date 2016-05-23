@@ -17,11 +17,10 @@ public class WorkSlot {
     @GeneratedValue
     private short id;
 
-    private String timeStart;
     private String job;
+    private String timeStart;
 
     @ManyToOne
-    @JsonIgnore
     private User user;
 
 }

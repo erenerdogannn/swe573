@@ -20,12 +20,12 @@ public class Announcement {
 
     private String name;
 
-    private Date announcementDate;
+    private String announcementDate;
 
     @Column(columnDefinition = "TEXT")
     private String info;
 
-    @Column(columnDefinition = "VARCHAR(2048)")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String PhotoURL;
 
     @ManyToOne
