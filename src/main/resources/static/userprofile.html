@@ -109,55 +109,70 @@
         
         jQuery.ajaxSetup({async:false});
         
-        var userId = window.location.href.split("?")[1];
+        if (document.cookie.indexOf('panelRol=') > -1) {
+            
+            var pnlRol = document.cookie.split('panelRol=')[1].split(';')[0];
+            console.log(userId);
+            
+            if (pnlRol == "admin" || pnlRol == "member" || pnlRol =="volunteer") {
+                
+                var userId = window.location.href.split("?")[1];
         
-        $.getJSON( urlRoot + "/users/" + userId, 
-            function (data) {
-                    
-                var tempPhotoURL;
-                var tempJob;
-                var tempAge;
-                var tempUserType;
-            
-                if (data.photoURL == "" || data.photoURL == null) {
-                    tempPhotoURL = "/assets/images/noimg.png";    
-                } else {
-                    tempPhotoURL = data.photoURL;
-                }
-            
-                if (data.job == "" || data.job == null) {
-                    tempJob = "";    
-                } else {
-                    tempJob = data.job;
-                }
-            
-                if (data.age == "" || data.age == null) {
-                    tempAge = "";    
-                } else {
-                    tempAge = data.age;
-                }
-            
-                if (data.userType == "volunteer") {
-                    tempUserType = "Gönüllü";    
-                } else if (data.userType == "member" ){
-                    tempUserType = "Üye";
-                } else {
-                    tempUserType = "";
-                }
+                $.getJSON( urlRoot + "/users/" + userId, 
+                    function (data) {
+
+                        var tempPhotoURL;
+                        var tempJob;
+                        var tempAge;
+                        var tempUserType;
+
+                        if (data.photoURL == "" || data.photoURL == null) {
+                            tempPhotoURL = "/assets/images/noimg.png";    
+                        } else {
+                            tempPhotoURL = data.photoURL;
+                        }
+
+                        if (data.job == "" || data.job == null) {
+                            tempJob = "";    
+                        } else {
+                            tempJob = data.job;
+                        }
+
+                        if (data.age == "" || data.age == null) {
+                            tempAge = "";    
+                        } else {
+                            tempAge = data.age;
+                        }
+
+                        if (data.userType == "volunteer") {
+                            tempUserType = "Gönüllü";    
+                        } else if (data.userType == "member" ){
+                            tempUserType = "Üye";
+                        } else {
+                            tempUserType = "";
+                        }
+
+                        $('#profile-container').append( 
+                            '<div class="row" style="padding-top: 30px;">' +
+                                '<img class="profile-element-pic" src="' + tempPhotoURL + '" style="width:200px; height:200px;">' +
+                                '<p class="profile-element" id="user-name"><b>Ad Soyad:&nbsp;&nbsp;</b> ' + data.name +' </p>' +
+                                '<p class="profile-element" id="user-email"><b>Email:&nbsp;&nbsp;</b>' + data.email + '</p>' +
+                                '<p class="profile-element" id="user-job"><b>Meslek:&nbsp;&nbsp;</b>' + tempJob + '</p>' +
+                                '<p class="profile-element" id="user-age"><b>Yaş:&nbsp;&nbsp;</b>' + tempAge + '</p>' +
+                                '<p class="profile-element" id="user-usertype"><b>Rol:&nbsp;&nbsp;</b>' + tempUserType + '</p>' +
+                            '</div>'
+                        );
+
+                    }
+                )
                 
-                $('#profile-container').append( 
-                    '<div class="row" style="padding-top: 30px;">' +
-                        '<img class="profile-element-pic" src="' + tempPhotoURL + '" style="width:200px; height:200px;">' +
-                        '<p class="profile-element" id="user-name"><b>Ad Soyad:&nbsp;&nbsp;</b> ' + data.name +' </p>' +
-                        '<p class="profile-element" id="user-email"><b>Email:&nbsp;&nbsp;</b>' + data.email + '</p>' +
-                        '<p class="profile-element" id="user-job"><b>Meslek:&nbsp;&nbsp;</b>' + tempJob + '</p>' +
-                        '<p class="profile-element" id="user-age"><b>Yaş:&nbsp;&nbsp;</b>' + tempAge + '</p>' +
-                        '<p class="profile-element" id="user-usertype"><b>Rol:&nbsp;&nbsp;</b>' + tempUserType + '</p>' +
-                    '</div>'
-                );
-                
+            } else {
+                alert('Profilleri görmek için üye olmalısınız.');
+                window.location.pathname = "products.html";
             }
-        )
+        }
+        
+
     });
     
     
