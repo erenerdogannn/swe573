@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: unikoop
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Eren
+Implementation-Vendor-Id: com.unikoop
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_25
+Main-Class: ${start-class}
+

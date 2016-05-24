@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
+    <title>Uni Koop</title>
+
+
+
+    <!-- Bootstrap -->
+    <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/stylesheets/main.css" type='text/css'>
+</head>
+<body class="preload">
+<div class="sign-wrapper" id="signup">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="logo-holder">
+                <a href="index.html"><img src="/assets/images/unikoop_logo.png" class="logo"></a>
+            </div>
+            <div class="sign-form-holder">
+                <form class="sign-form-group" role="signup" id="signup-form"
+                      onsubmit="return validateSignUpForm()">
+                    <div class="sign-heading-holder">
+                        <h2 class="form-heading">ÜYE OL</h2>
+                    </div>
+                    <div class="sign-message-holder" style="">
+                        <span class="form-error">error</span>
+                    </div>
+                    <div class="sign-message-holder" style="">
+                        <span class="form-success">success</span>
+                    </div>
+                    <div class="sign-form-item-holder">
+                        <div class="sign-form-item">
+                            <label class="">İsim Soyisim</label>
+                            <input type="text" class="form-text" name="" id="signup-name" placeholder=""
+                                   autofocus>
+                        </div>
+                        <div class="sign-form-item">
+                            <label class="">Email</label>
+                            <input type="email" class="form-text" name="" id="signup-email"
+                                   placeholder="" value="">
+                        </div>
+                        <div class="sign-form-item">
+                            <label>Şifre</label>
+                            <input type="password" class="form-text" name="" id="signup-password"
+                                   placeholder="">
+                            <span class="form-sub-info">min. 6 karakter</span>
+                        </div>
+                        <div class="sign-form-item">
+                            <label>Şifre Tekrar</label>
+                            <input type="password" class="form-text" id="signup-confirm-password"
+                                   placeholder="">
+                        </div>
+                        <div class="sign-form-item">
+                            <input type="checkbox" class="form-checkbox" id="term-checkbox">
+                            <span class="checkbox-span">Üyelik koşullarını onaylıyorum.</span>
+                        </div>
+                    </div>
+                    <div class="sign-button-holder">
+                        <button class="button button-green button-lg center" type="submit">ÜYELİK OLUŞTUR</button>
+                    </div>
+                </form>
+            </div>
+            <div class="sign-footer-holder">
+                <p>Zaten üyeliğiniz bulunuyorsa. Lütfen<a href="signin.html"> giriş yapınız. </a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/assets/javascript/jquery-2.1.1.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/assets/javascript/bootstrap.min.js"></script>
+
+<!-- main.js -->
+<script src="/assets/javascript/main.js"></script>
+
+<!--Remove Page Load Transition Effect. At the Beggining stop CSS Transactions -->
+<script>
+    $(window).load(function () {
+        $("body").removeClass("preload");
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+//--------------------PRIVACY, TERMS, FAQ PAGE-----------------------//
+//-------------------------------------------------------------------//
+
+#privacy,#terms, #faq {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
+  h2 {
+    @include font-style($fontstack, 28px, 500, 0);
+    color: $black;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  h4 {
+    @include font-style($fontstack, 16px, 500, 0);
+    color: $black;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  p {
+    @include font-style($fontstack, 14px, 400, 0);
+    color: $black;
+    margin-bottom: 15px;
+    line-height: 1.7em;
+  }
+  li {
+    @include font-style($fontstack, 14px, 400, 0);
+    color: $black;
+    margin-bottom: 15px;
+    line-height: 1.7em;
+    &.narrow {
+      margin-bottom: 0;
+    }
+  }
+}

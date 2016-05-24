@@ -1,0 +1,35 @@
+//-------------------------------404 PAGE----------------------------//
+//-------------------------------------------------------------------//
+
+
+// For 404 page
+.blue-bg {
+  @include gradient(top,  rgb(13,97,144),  rgba(13,97,144,0.7));
+}
+
+#error-page{
+  .logo-holder {
+    text-align: center;
+    margin-top: 30px;
+    .logo {
+      margin-right: auto;
+      margin-left: auto;
+      width: 150px;
+
+    }
+  }
+  .message-holder {
+    margin-top: 150px;
+    width: 100%;
+    text-align: center;
+    h1 {
+      @include font-style($fontstack, 150px, 200, 0);
+      color: $white;
+    }
+    p {
+      @include font-style($fontstack, 20px, 300, 0);
+      color: $white;
+      margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Uni Koop</title>
+
+
+<!-- CSS -->
+<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="assets/stylesheets/jquery.dataTables.tableTools.min.css" type="text/css">
+<link rel="stylesheet" href="assets/stylesheets/font-awesome.min.css">
+<link rel="stylesheet" href="assets/stylesheets/main.css" type='text/css'>
+<link rel="stylesheet" href="assets/stylesheets/select2.css" type='text/css'>
+<link rel="stylesheet" href="assets/stylesheets/bootstrap-select.min.css" type="text/css">
+<link rel="stylesheet" href="assets/stylesheets/jquery.fileupload.css" type="text/css">
+<link rel="stylesheet" href="assets/stylesheets/datatables.min.css" type="text/css">
+<link rel="stylesheet" href="assets/stylesheets/bootstrap-multiselect.css" type="text/css">
+
+</head>
+
+<body class="preload body-panel">
+
+<div class="panel-wrapper">
+
+    <!-- SIDEBAR -->
+    <div class="panel-sidebar-hide-wrapper">
+        <figure class="arrow-down"></figure>
+        <div class="panel-sidebar-wrapper">
+            <ul class="panel-sidebar-holder">
+                <li class="panel-sidebar-item first">
+                    <a href="index.html">
+                        <figure class="logo">
+                        </figure>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item">
+                    <a class="current" href="volunteer.html">
+                        <figure id=""></figure>
+                        <h5>GÖNÜLLÜ OL</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item volunteer-sidebar">
+                    <a  href="add-product-producer.html">
+                        <figure id=""></figure>
+                        <h5>ÜRÜN/ÜRETİCİ EKLE</h5>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item volunteer-sidebar">
+                    <a href="pos.html">
+                        <figure id=""></figure>
+                        <h5>POS</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item volunteer-sidebar">
+                    <a href="sales-report.html">
+                        <figure id=""></figure>
+                        <h5>SATIŞ RAPORU</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item volunteer-sidebar">
+                    <a href="inventory-report.html">
+                        <figure id=""></figure>
+                        <h5>STOK RAPORU</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item admin-sidebar">
+                    <a href="create-workslot.html">
+                        <figure id=""></figure>
+                        <h5>İŞ YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item admin-sidebar">
+                    <a href="create-event.html">
+                        <figure id=""></figure>
+                        <h5>ETKİNLİK YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item admin-sidebar">
+                    <a href="create-announcement.html">
+                        <figure id=""></figure>
+                        <h5>DUYURU YARAT</h5>
+                    </a>
+                </li>
+                <li class="panel-sidebar-item admin-sidebar">
+                    <a href="admin.html">
+                        <figure></figure>
+                        <h5>ADMIN</h5>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-user-holder dropdown">
+        
+        <!-- Kullanıcı loginse current class'ı koy -->
+        <a class="sidebar-user-item"  href="#"data-toggle="dropdown">
+            <h5><i class="fa fa-cog"></i> Hesabım</h5>
+        </a>
+
+        <ul class="dropdown-menu not-slide not-close sidebar-user-dropdown">
+            <span class="arrow-icon"></span>
+
+            <div class="user-account-holder">
+                <!-- <p class="user-name">Eren Erdoğan</p> -->
+                <a href="settings.html"
+                   class="button button-verythin a button-blue  button-xs right user-account-button">
+                    Profilim</a>
+            </div>
+
+            <div class="user-usage-holder">
+                <!-- <h5 class="user-usage-package">Admin</h5> -->
+
+                <!--
+                <p class="user-usage-project-number">Clicks</p>
+
+                <p class="user-usage-project-usage">Estimate</p>
+                -->
+            </div>
+
+            <div class="user-logout-holder">
+                <a id="sign-out-btn"
+                   class="button button-verythin a button-red  button-xs right user-logout-button">Çıkış Yap</a>
+            </div>
+
+
+        </ul>
+    </div>
+    <!-- END OF SIDEBAR -->
+
+    <div class="panel-content-wrapper without-header">
+        <div class="panel-content-holder without-header">
+
+            <!-- ALERTS
+
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Error!</strong>
+            </div>
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Success!</strong>
+            </div>
+
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <strong>Warning!</strong> 
+            </div>
+
+            END OF ALERTS -->
+            
+            <div class="panel-content-widget xlg border-bottom ">
+                <ul class="panel-content-heading-holder">
+                    <li class="panel-content-heading-item"><a href="#" class="current">
+                            Gönüllü Ol</a></li>
+                </ul>
+            </div>
+
+                <div class="panel-content-widget xlg" style="padding-top: 40px;">
+                    <div class="panel-table-holder">
+                        <table id="campaigns-table" class="table table-project">
+                            <thead>
+                            <tr>
+                                <th class="" width="300">
+                                    Görev 
+                                </th>
+                                <th class="" width="300">
+                                    Zaman
+                                </th>
+                                <th class="" width="180">
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="work-slot-table">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Campaign Modal -->
+<div class="modal fade" id="delete-project-modal" role="dialog" aria-labelledby="trackersModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="trackersModalLabel">Delete Placement</h4>
+            </div>
+            <div class="modal-body">
+                
+                <div class="modal-message-holder">
+                    <span class="form-error"></span>
+                </div>
+                <div class="modal-text-holder">
+                    <p class="modal-text center-txt" style="font-size: 19px; margin-bottom: 0px;">
+                         Are you sure to delete placement ?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="campaign_delete_url" href=""
+                   class="button a button-md button-red center">Delete Placement
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+
+<script src="assets/javascript/jquery-2.1.1.min.js"></script>
+<script src="assets/javascript/bootstrap.min.js"></script>
+<script src="assets/javascript/select2.min.js"></script>
+<script src="assets/javascript/jquery.multiple.select.min.js"></script>
+<script src="assets/javascript/moment-with-locales.min.js"></script>
+<script src="assets/javascript/moment-timezone-with-data-2010-2020.min.js"></script>
+<script src="assets/javascript/daterangepicker.min.js"></script>
+<script src="assets/javascript/highcharts-custom.min.js"></script>
+<script src="assets/javascript/map.js"></script>
+<script src="assets/javascript/datatables.min.js"></script>
+<script src="assets/javascript/jquery.dataTables.tableTools.min.js"></script>
+<script src="assets/javascript/jspath.min.js"></script>
+<script src="assets/javascript/jdata.js"></script>
+<script src="assets/javascript/main.js"></script>
+<script src="assets/javascript/pace.min.js"></script>
+
+<script src="assets/javascript/mappings.js"></script>
+
+<script src="assets/javascript/jquery.ui.widget.js"></script>
+<script src="assets/javascript/bootstrap-select.min.js"></script>
+<script src="assets/javascript/jquery.iframe-transport.js"></script>
+<script src="assets/javascript/jquery.fileupload.js"></script>
+<script src="assets/javascript/easytimer.min.js"></script>
+<script src="assets/javascript/bootstrap-multiselect.js"></script>
+<script src="assets/javascript/bootstrap-tagsinput.min.js"></script>
+
+<script>
+    // Array Remove - By John Resig (MIT Licensed)
+    Array.prototype.remove = function (from, to) {
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+    };
+</script>
+
+<script>
+    
+    jQuery.ajaxSetup({async:false});
+
+    $('#delete-project-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        modal.find('#campaign_name').html(button.data('cname'))
+        modal.find('#campaign_delete_url').attr("href", button.data('url'))
+    })
+    
+    
+    $(window).load(function() {
+
+        $.getJSON( urlRoot + "/workslots", 
+            function (data) {
+            
+                $.each( data, function( key, val ) {
+                $('#work-slot-table').append( "<tr value='"+ val.id +"'><td class='project-name-holder'>" + val.job +"</td><td class='project-name-holder'>" + val.timeStart + "</td><td class='project-button-holder'><a class='edit-button user-type-edit' href=''>Başvur</a></td></tr>" );
+                });         
+            }
+        )
+    });
+    
+    $('#work-slot-table').on('click', '.user-type-edit',function(){
+               
+        jQuery.ajaxSetup({async:false});
+        
+        var workId = $(this).parents('tr').attr('value');
+        console.log(workId);
+        
+        if (document.cookie.indexOf('uid=') > -1) {
+            
+            var userId = document.cookie.split('uid=')[1].split(';')[0];
+            console.log(userId);
+            
+            if (userId.length > 0 ) {
+                $.ajax({
+                    headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                    },
+                    type: "PUT",
+                    url: urlRoot + "/users/update/" + userId,
+
+                    data: JSON.stringify({
+                        userType: "volunteer"
+                    }),
+                    dataType:"json",
+                    success: function (html) {
+                        alert('Tebikler gönüllü oldunuz.');
+                        document.cookie = "role=" + "volunteer" + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                        document.cookie = "panelRol=" + "volunteer" + "; expires=Thu, 18 Dec 2016 12:00:00 UTC";
+                    },
+                     error: function (xhr, textStatus, thrownError) {
+                        alert('Önceden tanımlanmış kullanıcılar işe başvuramazlar.');
+
+                    }
+                });
+
+                //TODO: kapanan işleri başka bir yere aktarabiliriz.
+
+                $.ajax({
+                    headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                    },
+                    type: "DELETE",
+                    url: urlRoot + "/workslots/delete/" + workId,
+                    success: function (html) {
+                        console.log('İş kapandı');
+                    },
+                     error: function (xhr, textStatus, thrownError) {
+                        alert(textStatus, thrownError);
+                    }
+                });
+
+            } else { 
+                alert('Önceden tanımlı kullanıcılar işe başvuramaz.'); 
+                return false
+            }
+            
+        } else {
+            alert('Önemli bir hata meydana geldi. Siteye baştan giriş yapın.')
+        }
+        
+    });
+
+</script>
+</body>
+</html>

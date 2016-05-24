@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
+    <title>Uni Koop</title>
+
+
+
+    <!-- Bootstrap -->
+    <link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/main.css" type='text/css'>
+</head>
+<body class="preload">
+
+<!-- Main Header -->
+<header class="header-wrapper" id="index-header">
+    <div class="header-holder container-fluid">
+        <nav class="navbar-wrapper row">
+            <ul class="navbar-holder col-md-12">
+                <div class="logo-holder">
+                    <a href="#">
+                        <figure class="logo">
+                        </figure>
+                    </a>
+                </div>
+                <div class="navbar-item-holder">
+                    <li class="navbar-item"><a href="#"> Ana Sayfa</a></li>
+                    <li class="navbar-item"><a href="all-products.html"> Ürünler </a></li>
+                    <li class="navbar-item"><a href="all-producers.html"> Üreticiler </a></li>
+                    <li class="navbar-item"><a href="all-events.html"> Etkinlikler </a></li>
+                    <li class="navbar-item"><a href="all-announcements.html"> Duyurular </a></li>
+                    <li class="navbar-item"><a href="faq.html"> S.S.S </a></li>
+                    <li class="navbar-item"><a href="contact.html"> İletişim </a></li>
+                </div>
+
+                    <!-- if user is not signed in -->
+                    <div class="button-holder">
+                        <a class="sign-button isNotSignedBtn" id="signup-button" href="signup.html">Üye Ol</a>
+                    </div>
+                    <div class="button-holder">
+                        <a class="sign-button isNotSignedBtn" id="signin-button" href="signin.html">Giriş Yap</a>
+                    </div>
+
+                    <!-- if user is signed in -->
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" id="sign-out-btn" href="index.html">Sign Out</a>
+                    </div>
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" href="volunteer.html">PANEL</a>
+                    </div>
+            </ul>
+        </nav>
+    </div>
+</header>    
+<section class="index-content-wrapper">
+    <div class="index-content-holder container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="main-content-container" >
+                    <h5>Etkinlikler</h5>
+                    <ul class="event-list" id="event-list">
+                    </ul>
+                </div>
+                <div class="main-content-container">
+                <h5>Duyurular</h5>
+                    <ul class="event-list" id="ann-list">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="main-content-container" >
+                    <h5>Yeni Gelen Ürünler</h5>
+                    <div class="row" id="product-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    
+    
+<footer class="footer-wrapper" id="index-footer">
+    <div class="footer-holder container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xs-12 ">
+                <div class="logo-holder">
+                    <figure class="logo"></figure>
+                </div>
+            </div>
+            <div class="footer-item-wrapper col-md-6 col-xs-12">
+                <ul class="footer-item-holder">
+                    <li class="footer-item"><a href="contact.html">İletişim</a></li>
+                    <li class="footer-item"><a href="all-events.html">Etkinlikler</a></li>
+                    <li class="footer-item"><a href="all-announcements.html">Duyurular</a></li>
+                    <li class="footer-item"><a href="faq.html">S.S.S.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/javascript/jquery-2.1.1.min.js"></script>
+<script src="assets/javascript/bootstrap.min.js"></script>
+<script src="assets/javascript/moment.min.js"></script>
+<script src="assets/javascript/daterangepicker.min.js"></script>
+<script src="assets/javascript/main.js"></script>
+
+<script>
+    //Remove Page Load Transition Effect. At the Beggining stop CSS Transactions
+    $(window).load(function () {
+        jQuery.ajaxSetup({async:false});
+        
+        $("body").removeClass("preload");
+        
+        
+        
+       var products;
+        
+        $.getJSON( urlRoot + "/products", 
+            function (data) {
+                products = data;
+            }
+        );
+        
+        console.log(products);
+        
+        var minProducts = Math.max(products.length - 7, -1);
+                
+        for (var i = products.length - 1; i > minProducts ; i-- ) {
+            
+            var tempPhotoURL;
+            if (products[i].photoURL == "" || products[i].photoURL == null) {
+                tempPhotoURL = "assets/images/noimg.png";    
+            } else {
+                tempPhotoURL = products[i].photoURL;
+            }
+            
+            var tempPackageSize;
+            if (products[i].packageSize == 0) {
+                tempPackageSize = "";  
+            } else {
+                tempPackageSize = products[i].packageSize;
+            }
+            
+            
+            $('#product-list').append(
+                
+                '<a href="' + 'productdetail.html?' + products[i].id + '">'+
+                    '<div class="product-container col-md-4 col-xs-12">' +
+                        '<img src="' + tempPhotoURL + '" class="product-img">' +
+                        '<p class="product-name">' + products[i].name + '</p>' +
+                        '<p class="product-price-info">' +
+                            '<span class="product-price">' + products[i].price +'</span> TL / <span class="product-measurement">' + tempPackageSize + " " + products[i].measurement + '</span>' +
+                        '</p>' +
+                    '</div>' +
+                '</a>'
+            )
+        }
+        
+        
+        var events;
+        
+        $.getJSON( urlRoot + "/events", 
+            function (data) {
+                events = data;
+            }
+        );
+        
+        var minEvent = Math.max(events.length - 6, -1);
+                
+        for (var i = events.length - 1; i > minEvent ; i-- ) {
+            $('#event-list').append(
+            "<li><a href='all-events.html' ><span>" + events[i].eventDate + "</span> - <span>" + events[i].name + "</span></a></li>"
+            )
+        }
+        
+        
+        
+        var announcements;
+        
+        $.getJSON( urlRoot + "/announcements", 
+            function (data) {
+                announcements = data;
+            }
+        );
+        
+        var minAnn = Math.max(announcements.length - 6, -1);
+                
+        for (var i = announcements.length - 1; i > minAnn ; i-- ) {
+            $('#ann-list').append(
+            "<li><a href='all-announcements.html' ><span>" + announcements[i].announcementDate + "</span> - <span>" + announcements[i].name + "</span></a></li>"
+            )
+        }
+        
+        
+        
+
+    });
+
+    
+    
+</script>
+
+</body>
+</html>

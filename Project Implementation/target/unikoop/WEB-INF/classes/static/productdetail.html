@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
+    <title>Uni Koop</title>
+
+
+
+    <!-- Bootstrap -->
+    <link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/main.css" type='text/css'>
+</head>
+<body class="preload">
+
+<!-- Main Header -->
+<header class="header-wrapper" id="index-header">
+    <div class="header-holder container-fluid">
+        <nav class="navbar-wrapper row">
+            <ul class="navbar-holder col-md-12">
+                <div class="logo-holder">
+                    <a href="index.html">
+                        <figure class="logo">
+                        </figure>
+                    </a>
+                </div>
+                <div class="navbar-item-holder">
+                    <li class="navbar-item"><a href="index.html"> Ana Sayfa</a></li>
+                    <li class="navbar-item"><a href="all-products.html"> Ürünler </a></li>
+                    <li class="navbar-item"><a href="all-producers.html"> Üreticiler </a></li>
+                    <li class="navbar-item"><a href="all-events.html"> Etkinlikler </a></li>
+                    <li class="navbar-item"><a href="all-announcements.html"> Duyurular </a></li>
+                    <li class="navbar-item"><a href="faq.html"> S.S.S </a></li>
+                    <li class="navbar-item"><a href="contact.html"> İletişim </a></li>
+                </div>
+
+                    <!-- if user is not signed in -->
+                    <div class="button-holder">
+                        <a class="sign-button isNotSignedBtn" id="signup-button" href="signup.html">Üye Ol</a>
+                    </div>
+                    <div class="button-holder">
+                        <a class="sign-button isNotSignedBtn" id="signin-button" href="signin.html">Giriş Yap</a>
+                    </div>
+
+                    <!-- if user is signed in -->
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" id="sign-out-btn" href="index.html">Sign Out</a>
+                    </div>
+                    <div class="button-holder">
+                        <a class="sign-button isSignedBtn" href="volunteer.html">PANEL</a>
+                    </div>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<section class="index-content-wrapper">
+    <div class="index-content-holder container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="main-content-container" style="padding-top: 70px;">
+                    <div class="row"  id="product-detail-info">
+                        
+                    </div>
+                    <div class="row" style="margin: 35px 0px 10px">
+                        <button class="button button-blue button-md center" type="button" id="addProducer" data-toggle="modal" data-target="#add-comment-modal" data-cname="">Yorum Yaz</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 product-detail-comment-container" id="comments-container">
+                            <h5>Yorumlar</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    
+    
+<footer class="footer-wrapper" id="index-footer">
+    <div class="footer-holder container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xs-12 ">
+                <div class="logo-holder">
+                    <figure class="logo"></figure>
+                </div>
+            </div>
+            <div class="footer-item-wrapper col-md-6 col-xs-12">
+                <ul class="footer-item-holder">
+                    <li class="footer-item"><a href="contact.html">İletişim</a></li>
+                    <li class="footer-item"><a href="all-events.html">Etkinlikler</a></li>
+                    <li class="footer-item"><a href="all-announcements.html">Duyurular</a></li>
+                    <li class="footer-item"><a href="faq.html">S.S.S.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+<!-- Delete Campaign Modal -->
+<div class="modal fade" id="add-comment-modal" role="dialog" aria-labelledby="trackersModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="trackersModalLabel">Yorum Yaz</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-message-holder">
+                    <span class="form-error"></span>
+                </div>
+                <div class="modal-form-holder">
+                    <form class="modal-form-group" id="add-comment-form" action=""
+                          onsubmit="return validateAddDomain();">
+                        <div class="modal-form-item">
+                            <label class="form-label" for="comment-content">Yorum
+                            </label>
+                            <textarea class="form-text" id="comment-content" type="text" val="" autofocus></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button button-md button-blue center" id="add-comment-btn">Yorum Ekle</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<script src="assets/javascript/jquery-2.1.1.min.js"></script>
+<script src="assets/javascript/bootstrap.min.js"></script>
+<script src="assets/javascript/moment.min.js"></script>
+<script src="assets/javascript/daterangepicker.min.js"></script>
+<script src="assets/javascript/main.js"></script>
+    
+<script>
+
+    $(window).load(function () {
+        $("body").removeClass("preload");
+    });
+    
+    
+    $('#add-comment-btn').on('click', function(){
+        jQuery.ajaxSetup({async:false});
+        
+        
+        
+        if (document.cookie.split('uid=')[1].split(';')[0].length > 0) {
+            
+            var uid = document.cookie.split('uid=')[1].split(';')[0];
+            var prodId = window.location.href.split("?")[1];
+            var commentContent = $('#comment-content').val();
+            
+            console.log('userid'+ uid + ' prodid'+ prodId + ' '+ commentContent);
+            
+            $.ajax({
+                headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+                },
+                type: "POST",
+                url: urlRoot + "/comments/add",
+
+                data: JSON.stringify({
+                    content: commentContent,
+                    user: {
+                        id: uid
+                    },
+                    product: {
+                        id: prodId
+                    }
+                }),
+                dataType:"json",
+                success: function (html) {
+                    alert('Yorum başarıyla eklendi.');
+                    window.location.reload(true);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                            console.log(textStatus, errorThrown);
+                            alert('Hata meydana geldi.')
+                        }
+                });
+            
+        } else {
+            
+            alert('Sadece üyeler ve gönüllüler yorum yazabilir.');
+        }
+        
+    });
+    
+    
+    $(document).ready(function(){
+        
+        jQuery.ajaxSetup({async:false});
+        
+        var productId = window.location.href.split("?")[1];
+        var product;
+        
+        $.getJSON( urlRoot + "/products/" + productId, 
+            function (data) {
+            
+                var tempPhotoURL;
+                if (data.photoURL == "" || data.photoURL == null) {
+                    tempPhotoURL = "assets/images/noimg.png";    
+                } else {
+                    tempPhotoURL = data.photoURL;
+                }
+            
+                var tempPackageSize;
+                if (data.packageSize == 0) {
+                    tempPackageSize = "";  
+                } else {
+                    tempPackageSize = data.packageSize;
+                }
+            
+                console.log(data);
+                $('#product-detail-info').append(
+                    '<div class=" col-md-6 col-xs-12">' +
+                           ' <img src=" '+ tempPhotoURL +' " class="product-detail-img">' +
+                    '</div>' +
+                    '<div class="col-md-6 col-xs-12 product-detail-container">' +
+                        '<p id="product-detail-name" class="product-detail-name">' + data.name +'</p>' +
+                        '<p id="product-detail-price-info" class="product-detail-price-info">' +
+                            '<span class="product-detail-price">' + data.price +'</span> TL / <span class="product-detail-measurement">'+tempPackageSize + " " + data.measurement +'</span>' +
+                        '</p>' +
+                        '<p id="product-detail-producer" class="producer-info"><b>Üretici:&nbsp</b> <span>' + data.producer.name + '</span></p>' +
+                        '<p id="product-detail-region" class="producer-info"><b>Yöre:&nbsp</b> <span>' + data.region + '</span></p>' +
+                        '<p id="product-detail-info" class="producer-info"><b>Bilgi:&nbsp</b> <span>' + data.info + '</span></p>' +
+                    '</div>'
+                    
+                )
+            
+            }
+        )
+             
+        var prodId = window.location.href.split("?")[1];
+        var comments; 
+        var prodComments = {};
+        $.getJSON( urlRoot + "/comments", 
+            function (data) {
+                comments = data;
+            }
+        )
+        
+        for(var i = comments.length - 1; i > -1; i--) {
+            
+            if (comments[i].product.id == prodId ) {
+                
+                $('#comments-container').append(
+                        '<div class="product-comment">' +
+                            '<p>' + comments[i].content + '</p>' +
+                            '<a href="userprofile.html?' + comments[i].user.id + '"><h6>' + comments[i].user.name + '</h6></a>' +
+                        '</div>'
+                )
+                
+            }
+        }
+        
+    });
+    
+    
+
+</script>
+
+</body>
+</html>

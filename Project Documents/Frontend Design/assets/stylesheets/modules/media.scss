@@ -1,0 +1,231 @@
+@media screen and (max-width: 969px) {
+
+  body {
+    overflow-x: hidden;
+  }
+  .container-fluid {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  #flow-img {
+    height: 310px;
+  }
+
+}
+
+
+@media screen and (max-width: 600px) {
+  .container-fluid {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .header-wrapper .header-holder .navbar-wrapper .navbar-holder {
+
+    .button-holder {
+      padding-top: 30px;
+      width: 50%;
+      float: left;
+      text-align: center;
+    }
+    .logo-holder {
+      width: 100%;
+      .logo {
+        background-size: 130px auto;
+      }
+    }
+  }
+
+  #what #flow-img {
+    height: 280px;
+  }
+
+  .hero-wrapper .hero-holder .hero-static .button-holder .form-text {
+    width: 80%;
+    margin-right:0;
+    margin-left: 10%;
+  }
+
+  #flow-img {
+    height: 260px;
+  }
+
+  //Test Tool Page
+  #test-direction-arrow{
+    background: url('../images/test-tool-arrow-down.svg');
+    @include background-image(90px auto, center);
+  }
+
+
+
+}
+
+@media screen and (max-width: 550px) {
+
+  .index-content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .hero-wrapper .hero-holder .hero-static .button-holder .form-text {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+
+  #what {
+    #flow-img {
+      height: 210px;
+    }
+    .what-content {
+      text-align: center;
+    }
+  }
+
+  #criteria .criteria-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  #criteria .criteria-heading {
+    font-size: 14px;
+  }
+  #why {
+    .why-left-content-holder {
+      text-align: center;
+      padding-right: 15px;
+
+      .why-heading {
+        text-align: center !important;
+      }
+
+      .why-content {
+        text-align: center !important;
+      }
+      .left {
+        float: none;
+      }
+    }
+
+    .why-right-content-holder {
+      padding: 0;
+      padding-top: 30px;
+      .why-image {
+        height: 200px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  #report {
+    .report-left-content-holder {
+      .report-image {
+        display: none;
+      }
+    }
+    .report-right-content-holder {
+      .report-heading {
+        text-align:center;
+      }
+      .report-content {
+        text-align: center;
+      }
+    }
+  }
+  #reasons  {
+    height: initial;
+    .row > div {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      .reasons-right-side {
+        height: initial;
+        .reasons-content {
+          text-align: center;
+        }
+      }
+    }
+  }
+  #pricing .pricing-content-holder{
+    width: initial;
+    .pricing-content-item {
+      width: 100%;
+      height: 232px;
+      border-radius: 4px;
+      margin-bottom: 30px;
+      border: 1px solid $border-lighter;
+      .pricing-header {
+        border-radius: 4px 4px 0 0 ;
+      }
+      .pricing-button-holder {
+        display: none;
+      }
+
+      &:first-child {
+        border-radius: 4px;
+        border: 1px solid $border-lighter;
+      }
+      .pricing-header {
+        border-radius: 4px 4px 0 0 ;
+      }
+      &:last-child {
+        border-radius: 4px;
+        border: 1px solid $border-lighter;
+        .pricing-header {
+          border-radius: 4px 4px 0 0 ;
+        }
+      }
+    }
+  }
+  .call-action .call-action-heading {
+    font-size: 22px;
+  }
+  .footer-wrapper {
+    height: initial;
+    .footer-holder {
+      padding-bottom:10px;
+      .logo-holder {
+        .logo {
+          background-position: center;
+        }
+      }
+      .footer-item-wrapper {
+        .footer-item-holder{
+          height: initial;
+          padding-top: 30px;
+          width: 100%;
+          .footer-item {
+            width: 100%;
+            text-align: center;
+            display: block;
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .footer-copyright-holder {
+        .footer-copyright {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  //SIGN PAGES
+  .sign-wrapper .sign-form-holder {
+    width: 100%;
+  }
+  // FAQ TERMS PROVACY
+
+  #privacy, #terms, #faq {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  //Test tool Page
+  #test-direction-arrow{
+    background: url('../images/test-tool-arrow-down.svg');
+    @include background-image(90px auto, center);
+  }
+
+}
+
